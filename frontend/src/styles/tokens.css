@@ -1,0 +1,98 @@
+/*
+  RAKSHA design tokens.
+
+  The color system is borrowed wholesale from India's own public
+  weather-warning vocabulary (green/yellow/orange/red = all-clear / watch /
+  be-prepared / take-action) rather than an arbitrary brand palette — it's
+  the one piece of "chrome" the app can't afford to make up, since it's
+  also the emergency-communication language people may already recognize.
+
+  Two surfaces, not one dark theme everywhere:
+    - "paper"   — citizen-facing screens (Map, SOS, Shelters, Report...).
+                  Light, high-contrast, built to stay legible in outdoor
+                  daylight glare, closer to printed field-manual signage
+                  than to a typical app.
+    - "console" — the responder/admin dashboard. Dense data, control-room
+                  context, used indoors — a dark blue-slate suits it.
+*/
+
+:root {
+  /* --- Paper surface (default, citizen-facing) --- */
+  --paper: #f6f3ea;
+  --paper-raised: #ffffff;
+  --paper-muted: #ece7d8;
+  --ink: #14201c;
+  --ink-soft: #4a544e;
+  --ink-faint: #7c8580;
+  --line: rgba(20, 32, 28, 0.14);
+  --line-strong: rgba(20, 32, 28, 0.28);
+
+  /* --- Console surface (admin dashboard) --- */
+  --console: #101820;
+  --console-raised: #17212b;
+  --console-muted: #1c2732;
+  --console-ink: #e8ecef;
+  --console-ink-soft: #9fadb8;
+  --console-line: rgba(232, 236, 239, 0.14);
+  --console-line-strong: rgba(232, 236, 239, 0.26);
+
+  /* --- Alert taxonomy (IMD-style: green / yellow / orange / red) --- */
+  --alert-green: #1e7b45;
+  --alert-green-bg: #e3efe6;
+  --alert-yellow: #a67815;
+  --alert-yellow-bg: #f6ecd2;
+  --alert-orange: #c1521c;
+  --alert-orange-bg: #f5e2d4;
+  --alert-red: #b3261e;
+  --alert-red-bg: #f5dcda;
+
+  /* On the dark console surface, alert colors need to lighten to hold contrast */
+  --alert-green-console: #4cb87b;
+  --alert-yellow-console: #e0b545;
+  --alert-orange-console: #e8804a;
+  --alert-red-console: #e8564d;
+
+  /* --- Type --- */
+  --font-display: 'Big Shoulders', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* --- Spacing scale --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* --- Shape --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* --- Elevation (kept restrained — hairlines do most of the work) --- */
+  --shadow-sm: 0 1px 2px rgba(20, 32, 28, 0.08);
+  --shadow-md: 0 4px 16px rgba(20, 32, 28, 0.12);
+  --shadow-console-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+
+  /* --- Layout --- */
+  --nav-width: 240px;
+  --bottom-nav-height: 64px;
+  --alert-strip-height: 44px;
+  --content-max-width: 1160px;
+
+  /* --- Motion --- */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 120ms;
+  --duration-standard: 220ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-standard: 0ms;
+  }
+}
