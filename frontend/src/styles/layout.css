@@ -45,13 +45,34 @@
 
 .alert-strip__lang {
   flex-shrink: 0;
-  background: transparent;
-  border: 1px solid currentColor;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
   color: inherit;
-  border-radius: var(--radius-sm);
-  padding: 3px 8px;
+  border-radius: var(--radius-md);
+  padding: 4px 10px;
   font-family: var(--font-mono);
   font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  backdrop-filter: blur(4px);
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.alert-strip__lang:hover, .alert-strip__lang:focus {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.alert-strip__lang option {
+  background-color: #1a2622;
+  color: #ffffff;
+  padding: 8px 12px;
+}
+
+.alert-strip[data-level='yellow'] .alert-strip__lang option {
+  background-color: #ffffff;
+  color: #241a02;
 }
 
 /* --- Body: nav + main --- */

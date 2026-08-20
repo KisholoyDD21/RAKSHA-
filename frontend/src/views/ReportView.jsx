@@ -170,7 +170,7 @@ export function ReportView() {
         </button>
       </form>
 
-      <h3 style={{ marginBottom: 'var(--space-3)' }}>Recent reports</h3>
+      <h3 style={{ marginBottom: 'var(--space-3)' }}>{t('report.recentReports')}</h3>
       {recent.length === 0 && <EmptyState label={t('common.noResults')} />}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
         {recent.map((incident) => (
@@ -202,7 +202,7 @@ function IncidentCard({ incident, onVote, t }) {
           <div>
             <div style={{ fontWeight: 700 }}>{t(`report.types.${incident.type}`)}</div>
             <div style={{ fontSize: 12, color: 'var(--ink-soft)' }}>
-              {t('map.severity')} {incident.severity}/5 · {timeAgo(incident.createdAt)}
+              {t('map.severity')} {incident.severity}/5 · {timeAgo(incident.createdAt, t)}
             </div>
           </div>
         </div>

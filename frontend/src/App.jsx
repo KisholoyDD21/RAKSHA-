@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { AlertStrip } from './components/AlertStrip.jsx';
 import { NavBar } from './components/NavBar.jsx';
@@ -16,15 +16,12 @@ import { AdminView } from './views/AdminView.jsx';
 import { SettingsView } from './views/SettingsView.jsx';
 
 export default function App() {
-  const location = useLocation();
-  const isConsole = location.pathname.startsWith('/admin');
-
   return (
-    <div className="app-shell" data-surface={isConsole ? 'console' : 'paper'}>
+    <div className="app-shell" data-surface="paper">
       <AlertStrip />
       <div className="app-body">
         <NavBar />
-        <main className={`app-main${isConsole ? ' app-main--console' : ''}`}>
+        <main className="app-main">
           <Routes>
             <Route path="/" element={<Navigate to="/map" replace />} />
             <Route path="/map" element={<MapView />} />
@@ -45,3 +42,4 @@ export default function App() {
     </div>
   );
 }
+

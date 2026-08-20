@@ -89,7 +89,9 @@ export function SOSView() {
 
   const mapsLink = location ? `https://www.google.com/maps?q=${location.lat},${location.lng}` : '';
   const shareMessage = location
-    ? `EMERGENCY — I need help (${type}). My live location: ${mapsLink} — sent via RAKSHA`
+    ? (t('sos.shareMessage') || 'EMERGENCY — I need help ({type}). My live location: {link} — sent via RAKSHA')
+        .replace('{type}', t(`sos.types.${type}`))
+        .replace('{link}', mapsLink)
     : '';
 
   return (
@@ -158,7 +160,7 @@ export function SOSView() {
                   <MapPin size={12} style={{ verticalAlign: 'middle' }} /> {location?.lat.toFixed(5)}, {location?.lng.toFixed(5)}
                 </p>
               </div>
-              <StatusBadgeLike />
+              <StatusBadgeLike t={t} />
             </div>
           </div>
 
@@ -202,7 +204,7 @@ export function SOSView() {
           </div>
 
           <button className="btn btn--outline btn--block" onClick={reset} type="button">
-            <RotateCcw size={16} /> Send another SOS
+            <RotateCcw size={16} /> {t('sos.sendAnother')}
           </button>
         </div>
       )}
@@ -210,6 +212,6 @@ export function SOSView() {
   );
 }
 
-function StatusBadgeLike() {
-  return <span className="badge badge--red">ACTIVE</span>;
+function StatusBadgeLike({ t }) {
+  return <span className="badge badge--red">{t ? t('sos.active') : 'ACTIVE'}</span>;
 }

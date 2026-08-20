@@ -9,11 +9,16 @@ export function AlertStrip() {
   const { t } = useTranslation();
 
   const level = areaAlert?.level || 'green';
+  const headline = areaAlert
+    ? level === 'red'
+      ? t('alert.redHeadline').replace('{count}', areaAlert.activeCount || 1)
+      : t(`alert.${level}Headline`)
+    : '…';
 
   return (
     <div className="alert-strip" data-level={level} role="status">
       <span className="alert-strip__badge">{t(`alert.${level}`)}</span>
-      <span className="alert-strip__headline">{areaAlert ? areaAlert.headline : '…'}</span>
+      <span className="alert-strip__headline">{headline}</span>
       <select
         className="alert-strip__lang"
         value={profile.language}

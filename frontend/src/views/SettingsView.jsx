@@ -28,8 +28,21 @@ export function SettingsView() {
 
       <div className="card" style={{ marginBottom: 'var(--space-4)' }}>
         <div className="field">
-          <label>{t('settings.language')}</label>
-          <div className="chip-group">
+          <label htmlFor="settings-lang-select">{t('settings.language')} (22 Available)</label>
+          <select
+            id="settings-lang-select"
+            className="select"
+            style={{ marginBottom: 'var(--space-3)' }}
+            value={profile.language}
+            onChange={(e) => updateProfile({ language: e.target.value })}
+          >
+            {SUPPORTED_LANGUAGES.map((l) => (
+              <option key={l.code} value={l.code}>
+                {l.label} ({l.code.toUpperCase()})
+              </option>
+            ))}
+          </select>
+          <div className="chip-group" style={{ maxHeight: '180px', overflowY: 'auto', padding: '2px' }}>
             {SUPPORTED_LANGUAGES.map((l) => (
               <button
                 key={l.code}
@@ -108,8 +121,7 @@ export function SettingsView() {
 
       <h3 style={{ marginTop: 'var(--space-5)', marginBottom: 'var(--space-2)' }}>{t('settings.about')}</h3>
       <p style={{ fontSize: 13, color: 'var(--ink-soft)' }}>
-        RAKSHA is a disaster-response coordination platform: live hazard map, hazard-aware safe routing, one-tap SOS,
-        shelter finder, and crowd-verified incident reporting. Your device ID: <span className="mono">{profile.userId.slice(0, 8)}…</span>
+        {t('settings.aboutText')} {t('settings.deviceId')} <span className="mono">{profile.userId.slice(0, 8)}…</span>
       </p>
     </div>
   );

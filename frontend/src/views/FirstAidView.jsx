@@ -66,7 +66,7 @@ export function FirstAidView() {
                   </ol>
 
                   <div style={{ marginTop: 'var(--space-3)', background: 'var(--paper-muted)', borderRadius: 'var(--radius-md)', padding: 'var(--space-3)' }}>
-                    <strong style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Don't</strong>
+                    <strong style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{t('firstAid.dont')}</strong>
                     <ul style={{ marginTop: 4, display: 'flex', flexDirection: 'column', gap: 4 }}>
                       {topic.doNot.map((item, i) => (
                         <li key={i} style={{ fontSize: 13, color: 'var(--ink-soft)' }}>• {item}</li>

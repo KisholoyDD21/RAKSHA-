@@ -1,23 +1,47 @@
-// Full UI coverage for English and Hindi. The lookup structure is a flat
-// dot-path object per language rather than deeply nested, which keeps
-// t('sos.holdToConfirm') simple and makes it obvious at a glance which
-// keys still need translating when adding a third language.
+// Full UI coverage for 22 languages: English, Hindi, Marathi, Bengali, Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi, Odia, Assamese, Urdu, Spanish, French, German, Arabic, Chinese, Japanese, Portuguese, Russian, and Korean.
+
+export const SUPPORTED_LANGUAGES = [
+  { code: 'en', label: 'English' },
+  { code: 'hi', label: 'हिन्दी (Hindi)' },
+  { code: 'mr', label: 'मराठी (Marathi)' },
+  { code: 'bn', label: 'বাংলা (Bengali)' },
+  { code: 'ta', label: 'தமிழ் (Tamil)' },
+  { code: 'te', label: 'తెలుగు (Telugu)' },
+  { code: 'gu', label: 'ગુજરાતી (Gujarati)' },
+  { code: 'kn', label: 'ಕನ್ನಡ (Kannada)' },
+  { code: 'ml', label: 'മലയാളം (Malayalam)' },
+  { code: 'pa', label: 'ਪੰਜਾਬੀ (Punjabi)' },
+  { code: 'or', label: 'ଓଡ଼ିଆ (Odia)' },
+  { code: 'as', label: 'অসমীয়া (Assamese)' },
+  { code: 'ur', label: 'اردو (Urdu)' },
+  { code: 'es', label: 'Español (Spanish)' },
+  { code: 'fr', label: 'Français (French)' },
+  { code: 'de', label: 'Deutsch (German)' },
+  { code: 'ar', label: 'العربية (Arabic)' },
+  { code: 'zh', label: '中文 (Chinese)' },
+  { code: 'ja', label: '日本語 (Japanese)' },
+  { code: 'pt', label: 'Português (Portuguese)' },
+  { code: 'ru', label: 'Русский (Russian)' },
+  { code: 'ko', label: '한국어 (Korean)' },
+];
 
 export const translations = {
   en: {
     appName: 'RAKSHA',
     tagline: 'Disaster Response Grid',
-
     nav: {
       map: 'Map', sos: 'SOS', shelters: 'Shelters', report: 'Report', broadcasts: 'Alerts',
       family: 'Family', firstAid: 'First Aid', assistant: 'Assistant', admin: 'Admin', settings: 'Settings',
+      more: 'More',
     },
-
     alert: {
       green: 'All Clear', yellow: 'Watch', orange: 'Be Prepared', red: 'Take Action',
       activeCount: 'active incident(s)',
+      greenHeadline: 'No active hazards reported in your area.',
+      yellowHeadline: 'Isolated reports being monitored. No immediate action needed.',
+      orangeHeadline: 'Elevated hazard activity in the area. Review safe routes before heading out.',
+      redHeadline: '{count} severe incident(s) active — avoid affected zones and follow shelter guidance.',
     },
-
     common: {
       loading: 'Loading…', retry: 'Retry', cancel: 'Cancel', save: 'Save', close: 'Close',
       confirm: 'Confirm', submit: 'Submit', away: 'away', viewOnMap: 'View on map',
@@ -26,7 +50,6 @@ export const translations = {
       onlineAgain: 'Back online — syncing…', noResults: 'Nothing to show here yet.',
       error: 'Something went wrong', tryAgain: 'Try again',
     },
-
     sos: {
       title: 'Emergency SOS', holdToConfirm: 'HOLD TO SEND SOS',
       holdInstructions: 'Press and hold for 2 seconds to send your live location to responders.',
@@ -38,9 +61,9 @@ export const translations = {
       notifyHint: 'Opens WhatsApp/SMS pre-filled with your live location — nothing sends automatically without you tapping through.',
       noContacts: 'Add emergency contacts in Settings to enable one-tap alerts.',
       locationDenied: 'Location access is required for SOS. Enable it in your browser/device settings and try again.',
-      cancel: 'Release to cancel',
+      cancel: 'Release to cancel', sendAnother: 'Send another SOS', active: 'ACTIVE',
+      shareMessage: 'EMERGENCY — I need help ({type}). My live location: {link} — sent via RAKSHA',
     },
-
     map: {
       title: 'Live Disaster Map', layers: 'Layers', hazards: 'Hazards', facilities: 'Facilities',
       planRoute: 'Plan a safe route', origin: 'Origin', destination: 'Destination', useMyLocation: 'Use my location',
@@ -48,15 +71,14 @@ export const translations = {
       sourceGrid: 'offline estimated route (road network unreachable)', hazardsAvoided: 'hazard zone(s) considered',
       distance: 'Distance', duration: 'Est. time', clearRoute: 'Clear route',
       severity: 'Severity', reportedAgo: 'reported', tapForDetails: 'Tap a marker for details',
+      pick: 'Pick', tapMap: 'Tap map…', tapMapToSet: 'Tap the map to set',
     },
-
     shelters: {
       title: 'Shelters & Facilities', all: 'All', shelter: 'Shelters', hospital: 'Hospitals',
       relief_camp: 'Relief Camps', police: 'Police', fire_station: 'Fire Stations', resource_point: 'Resource Points',
       capacity: 'Capacity', occupancy: 'Occupancy', status: { open: 'Open', full: 'Full', closed: 'Closed' },
       sortedByDistance: 'Sorted by distance from you', enableLocation: 'Enable location to sort by distance',
     },
-
     report: {
       title: 'Report an Incident', type: 'Type of incident', description: 'Description (optional)',
       descriptionPlaceholder: 'What are you seeing? Water level, fire size, how many lanes blocked…',
@@ -67,13 +89,13 @@ export const translations = {
       needLocation: 'Please set a location for this report.',
       confirmReport: 'Confirm', disputeReport: 'Dispute', confirmations: 'confirmations', disputes: 'disputes',
       confidence: 'Confidence', status: { unverified: 'Unverified', verified: 'Verified', disputed: 'Disputed', resolved: 'Resolved' },
+      recentReports: 'Recent reports',
       types: {
         flood: 'Flood', fire: 'Fire', accident: 'Accident', roadblock: 'Roadblock', landslide: 'Landslide',
         storm: 'Storm', earthquake: 'Earthquake', building_collapse: 'Building Collapse',
         power_outage: 'Power Outage', chemical_leak: 'Chemical Leak', other: 'Other',
       },
     },
-
     broadcasts: {
       title: 'Official Alerts', newBroadcast: 'New broadcast', category: 'Category', priority: 'Priority level',
       titleLabel: 'Title', message: 'Message', send: 'Send broadcast', sent: 'Broadcast sent to all users',
@@ -82,60 +104,68 @@ export const translations = {
         safety_instruction: 'Safety Instruction', general: 'General',
       },
     },
-
     family: {
       title: 'Family Safety', groupCode: 'Family group code', groupCodeHint: 'Share this code with family — anyone who enters it can see and update the group\'s status.',
       createGroup: 'Create a new group', joinGroup: 'Join with a code', yourName: 'Your name',
       iAmSafe: "I'm safe", iNeedHelp: 'I need help', unknown: 'Unknown', checkIn: 'Check in',
       lastUpdated: 'Last updated', noMembers: 'No one has checked in to this group yet. Share the code to get started.',
       shareCode: 'Share group code',
+      shareInvite: 'Join my RAKSHA family safety group with code: {code}',
     },
-
     firstAid: {
       title: 'First Aid Guide', readAloud: 'Read aloud', stopReading: 'Stop', disclaimer:
         'General guidance only — not a substitute for professional care or certified first-aid training. Call 112 for any life-threatening emergency.',
+      dont: "Don't",
       topics: {
         bleeding: 'Bleeding', burns: 'Burns', drowning: 'Drowning', fractures: 'Fractures',
         smoke_inhalation: 'Smoke Inhalation', dehydration: 'Dehydration & Heat Illness', panic: 'Panic & Acute Stress',
       },
     },
-
     assistant: {
       title: 'AI Hazard Assistant', placeholder: 'Ask about a hazard, a safe route, or what to do right now…',
       ask: 'Ask', thinking: 'Thinking…', sourceAi: 'AI-generated', sourceRuleBased: 'Rule-based (offline-safe) guidance',
       suggestionsLabel: 'Try asking:',
       suggestions: ['What should I do about the flooding near me?', 'Where is the nearest open shelter?', 'Is it safe to travel through Byculla right now?'],
     },
-
     admin: {
       title: 'Responder Dashboard', login: 'Admin Login', passcode: 'Passcode', loginButton: 'Log in',
       loginError: 'Incorrect passcode', logout: 'Log out', priorityQueue: 'Priority Queue',
       activeIncidents: 'Active Incidents', activeSos: 'Active SOS', avgShelterOccupancy: 'Avg. Shelter Occupancy',
       verifiedShare: 'Verified Reports', markResolved: 'Mark resolved', updateStatus: 'Update status',
-      manageFacilities: 'Manage Facilities', updateOccupancy: 'Update occupancy',
+      manageFacilities: 'Manage Facilities', updateOccupancy: 'Update occupancy', unverified: 'Unverified',
+      demoHint: 'Demo default passcode:', demoHintSuffix: '(set ADMIN_PASSCODE in backend/.env to change it)',
     },
-
     settings: {
       title: 'Settings', language: 'Language', yourName: 'Your name', yourNamePlaceholder: 'Optional — shown on your reports',
       emergencyContacts: 'Emergency Contacts', addContact: 'Add contact', contactName: 'Name', contactPhone: 'Phone number',
       familyGroupCode: 'Default family group code', about: 'About RAKSHA',
+      aboutText: 'RAKSHA is a disaster-response coordination platform: live hazard map, hazard-aware safe routing, one-tap SOS, shelter finder, and crowd-verified incident reporting.',
+      deviceId: 'Your device ID:',
+    },
+    time: {
+      justNow: 'just now',
+      minutesAgo: '{m}m ago',
+      hoursAgo: '{h}h ago',
+      daysAgo: '{d}d ago',
     },
   },
 
   hi: {
     appName: 'रक्षा',
     tagline: 'आपदा प्रतिक्रिया ग्रिड',
-
     nav: {
       map: 'मानचित्र', sos: 'एसओएस', shelters: 'आश्रय स्थल', report: 'रिपोर्ट करें', broadcasts: 'चेतावनियाँ',
       family: 'परिवार', firstAid: 'प्राथमिक चिकित्सा', assistant: 'सहायक', admin: 'व्यवस्थापक', settings: 'सेटिंग्स',
+      more: 'अधिक',
     },
-
     alert: {
       green: 'सामान्य', yellow: 'निगरानी', orange: 'तैयार रहें', red: 'कार्रवाई करें',
       activeCount: 'सक्रिय घटनाएँ',
+      greenHeadline: 'आपके क्षेत्र में कोई सक्रिय खतरा रिपोर्ट नहीं किया गया है।',
+      yellowHeadline: 'निगरानी की जा रही अलग-थलग रिपोर्ट। किसी तत्काल कार्रवाई की आवश्यकता नहीं है।',
+      orangeHeadline: 'क्षेत्र में बढ़ी हुई खतरा गतिविधि। बाहर निकलने से पहले सुरक्षित मार्गों की समीक्षा करें।',
+      redHeadline: '{count} गंभीर घटनाएँ सक्रिय हैं — प्रभावित क्षेत्रों से बचें और आश्रय निर्देशों का पालन करें।',
     },
-
     common: {
       loading: 'लोड हो रहा है…', retry: 'पुनः प्रयास करें', cancel: 'रद्द करें', save: 'सहेजें', close: 'बंद करें',
       confirm: 'पुष्टि करें', submit: 'सबमिट करें', away: 'दूर', viewOnMap: 'मानचित्र पर देखें',
@@ -144,7 +174,6 @@ export const translations = {
       onlineAgain: 'फिर से ऑनलाइन — समन्वयित हो रहा है…', noResults: 'अभी यहाँ दिखाने के लिए कुछ नहीं है।',
       error: 'कुछ गड़बड़ हो गई', tryAgain: 'फिर से प्रयास करें',
     },
-
     sos: {
       title: 'आपातकालीन एसओएस', holdToConfirm: 'एसओएस भेजने के लिए दबाए रखें',
       holdInstructions: 'प्रतिक्रियादाताओं को अपना लाइव स्थान भेजने के लिए 2 सेकंड तक दबाकर रखें।',
@@ -156,9 +185,9 @@ export const translations = {
       notifyHint: 'आपके लाइव स्थान के साथ पहले से भरा हुआ व्हाट्सएप/एसएमएस खोलता है — आपके टैप किए बिना कुछ भी अपने आप नहीं भेजा जाता।',
       noContacts: 'एक-टैप अलर्ट सक्षम करने के लिए सेटिंग्स में आपातकालीन संपर्क जोड़ें।',
       locationDenied: 'एसओएस के लिए स्थान की अनुमति आवश्यक है। इसे अपनी ब्राउज़र/डिवाइस सेटिंग्स में सक्षम करें और फिर से प्रयास करें।',
-      cancel: 'रद्द करने के लिए छोड़ें',
+      cancel: 'रद्द करने के लिए छोड़ें', sendAnother: 'एक और एसओएस भेजें', active: 'सक्रिय',
+      shareMessage: 'आपातकालीन — मुझे मदद चाहिए ({type})। मेरा लाइव स्थान: {link} — रक्षा के माध्यम से भेजा गया',
     },
-
     map: {
       title: 'लाइव आपदा मानचित्र', layers: 'परतें', hazards: 'खतरे', facilities: 'सुविधाएं',
       planRoute: 'सुरक्षित मार्ग बनाएं', origin: 'प्रारंभिक स्थान', destination: 'गंतव्य', useMyLocation: 'मेरा स्थान उपयोग करें',
@@ -166,15 +195,14 @@ export const translations = {
       sourceGrid: 'ऑफ़लाइन अनुमानित मार्ग (सड़क नेटवर्क अनुपलब्ध)', hazardsAvoided: 'खतरा क्षेत्र माने गए',
       distance: 'दूरी', duration: 'अनुमानित समय', clearRoute: 'मार्ग हटाएं',
       severity: 'गंभीरता', reportedAgo: 'रिपोर्ट किया गया', tapForDetails: 'विवरण के लिए मार्कर पर टैप करें',
+      pick: 'चुनें', tapMap: 'मानचित्र पर टैप करें…', tapMapToSet: 'सेट करने के लिए मानचित्र पर टैप करें',
     },
-
     shelters: {
       title: 'आश्रय स्थल और सुविधाएं', all: 'सभी', shelter: 'आश्रय स्थल', hospital: 'अस्पताल',
       relief_camp: 'राहत शिविर', police: 'पुलिस', fire_station: 'दमकल केंद्र', resource_point: 'संसाधन केंद्र',
       capacity: 'क्षमता', occupancy: 'वर्तमान संख्या', status: { open: 'खुला', full: 'भरा हुआ', closed: 'बंद' },
       sortedByDistance: 'आपसे दूरी के अनुसार क्रमबद्ध', enableLocation: 'दूरी के अनुसार क्रमबद्ध करने के लिए स्थान सक्षम करें',
     },
-
     report: {
       title: 'घटना की रिपोर्ट करें', type: 'घटना का प्रकार', description: 'विवरण (वैकल्पिक)',
       descriptionPlaceholder: 'आप क्या देख रहे हैं? पानी का स्तर, आग का आकार, कितनी लेन बंद हैं…',
@@ -185,13 +213,13 @@ export const translations = {
       needLocation: 'कृपया इस रिपोर्ट के लिए एक स्थान सेट करें।',
       confirmReport: 'पुष्टि करें', disputeReport: 'विवाद करें', confirmations: 'पुष्टियाँ', disputes: 'विवाद',
       confidence: 'विश्वसनीयता', status: { unverified: 'असत्यापित', verified: 'सत्यापित', disputed: 'विवादित', resolved: 'सुलझाया गया' },
+      recentReports: 'हाल की रिपोर्टें',
       types: {
         flood: 'बाढ़', fire: 'आग', accident: 'दुर्घटना', roadblock: 'सड़क अवरोध', landslide: 'भूस्खलन',
         storm: 'तूफान', earthquake: 'भूकंप', building_collapse: 'इमारत ढहना',
         power_outage: 'बिजली गुल', chemical_leak: 'रासायनिक रिसाव', other: 'अन्य',
       },
     },
-
     broadcasts: {
       title: 'आधिकारिक चेतावनियाँ', newBroadcast: 'नई चेतावनी भेजें', category: 'श्रेणी', priority: 'प्राथमिकता स्तर',
       titleLabel: 'शीर्षक', message: 'संदेश', send: 'चेतावनी भेजें', sent: 'सभी उपयोगकर्ताओं को चेतावनी भेजी गई',
@@ -200,53 +228,313 @@ export const translations = {
         safety_instruction: 'सुरक्षा निर्देश', general: 'सामान्य',
       },
     },
-
     family: {
       title: 'पारिवारिक सुरक्षा', groupCode: 'पारिवारिक समूह कोड', groupCodeHint: 'यह कोड परिवार के साथ साझा करें — जो भी इसे दर्ज करेगा वह समूह की स्थिति देख और अपडेट कर सकता है।',
       createGroup: 'नया समूह बनाएं', joinGroup: 'कोड से शामिल हों', yourName: 'आपका नाम',
       iAmSafe: 'मैं सुरक्षित हूँ', iNeedHelp: 'मुझे मदद चाहिए', unknown: 'अज्ञात', checkIn: 'चेक इन करें',
       lastUpdated: 'अंतिम अपडेट', noMembers: 'अभी तक कोई भी इस समूह में चेक इन नहीं हुआ है। शुरू करने के लिए कोड साझा करें।',
       shareCode: 'समूह कोड साझा करें',
+      shareInvite: 'कोड के साथ मेरे रक्षा पारिवारिक सुरक्षा समूह में शामिल हों: {code}',
     },
-
     firstAid: {
       title: 'प्राथमिक चिकित्सा गाइड', readAloud: 'ज़ोर से पढ़ें', stopReading: 'रोकें', disclaimer:
         'केवल सामान्य मार्गदर्शन — यह पेशेवर देखभाल या प्रमाणित प्राथमिक चिकित्सा प्रशिक्षण का विकल्प नहीं है। किसी भी जानलेवा आपात स्थिति में 112 पर कॉल करें।',
+      dont: 'न करें',
       topics: {
         bleeding: 'रक्तस्राव', burns: 'जलना', drowning: 'डूबना', fractures: 'हड्डी टूटना',
         smoke_inhalation: 'धुआं अंदर जाना', dehydration: 'निर्जलीकरण और गर्मी', panic: 'घबराहट और तीव्र तनाव',
       },
     },
-
     assistant: {
       title: 'एआई खतरा सहायक', placeholder: 'किसी खतरे, सुरक्षित मार्ग, या अभी क्या करें — इसके बारे में पूछें…',
       ask: 'पूछें', thinking: 'सोच रहा है…', sourceAi: 'एआई-जनित', sourceRuleBased: 'नियम-आधारित (ऑफ़लाइन-सुरक्षित) मार्गदर्शन',
       suggestionsLabel: 'यह पूछ कर देखें:',
       suggestions: ['मेरे पास बाढ़ के बारे में मुझे क्या करना चाहिए?', 'निकटतम खुला आश्रय स्थल कहाँ है?', 'क्या अभी बायकुला से होकर यात्रा करना सुरक्षित है?'],
     },
-
     admin: {
       title: 'प्रतिक्रियादाता डैशबोर्ड', login: 'व्यवस्थापक लॉगिन', passcode: 'पासकोड', loginButton: 'लॉगिन करें',
       loginError: 'गलत पासकोड', logout: 'लॉगआउट', priorityQueue: 'प्राथमिकता कतार',
       activeIncidents: 'सक्रिय घटनाएं', activeSos: 'सक्रिय एसओएस', avgShelterOccupancy: 'औसत आश्रय भराव',
       verifiedShare: 'सत्यापित रिपोर्ट', markResolved: 'सुलझा हुआ चिह्नित करें', updateStatus: 'स्थिति अपडेट करें',
-      manageFacilities: 'सुविधाएं प्रबंधित करें', updateOccupancy: 'वर्तमान संख्या अपडेट करें',
+      manageFacilities: 'सुविधाएं प्रबंधित करें', updateOccupancy: 'वर्तमान संख्या अपडेट करें', unverified: 'असत्यापित',
+      demoHint: 'डेमो डिफ़ॉल्ट पासकोड:', demoHintSuffix: '(इसे बदलने के लिए backend/.env में ADMIN_PASSCODE सेट करें)',
     },
-
     settings: {
       title: 'सेटिंग्स', language: 'भाषा', yourName: 'आपका नाम', yourNamePlaceholder: 'वैकल्पिक — आपकी रिपोर्ट पर दिखाया जाएगा',
       emergencyContacts: 'आपातकालीन संपर्क', addContact: 'संपर्क जोड़ें', contactName: 'नाम', contactPhone: 'फोन नंबर',
       familyGroupCode: 'डिफ़ॉल्ट पारिवारिक समूह कोड', about: 'रक्षा के बारे में',
+      aboutText: 'रक्षा एक आपदा-प्रतिक्रिया समन्वय मंच है: लाइव खतरा मानचित्र, खतरा-जागरूक सुरक्षित मार्ग, एक-टैप एसओएस, आश्रय खोजक, और भीड़-सत्यापित घटना रिपोर्टिंग।',
+      deviceId: 'आपकी डिवाइस आईडी:',
     },
+    time: {
+      justNow: 'अभी',
+      minutesAgo: '{m} मि पहले',
+      hoursAgo: '{h} घंटे पहले',
+      daysAgo: '{d} दिन पहले',
+    },
+  },
+
+  mr: {
+    appName: 'रक्षा', tagline: 'आपत्ती प्रतिसाद ग्रिड',
+    nav: { map: 'नकाशा', sos: 'एसओएस', shelters: 'निवारे', report: 'रिपोर्ट करा', broadcasts: 'अलर्ट', family: 'कुटुंब', firstAid: 'प्रथमोपचार', assistant: 'सहाय्यक', admin: 'प्रशासक', settings: 'सेटिंग्ज', more: 'अधिक' },
+    alert: { green: 'सुरक्षित', yellow: 'लक्ष ठेवा', orange: 'तयार राहा', red: 'कृती करा', activeCount: 'सक्रिय घटना', greenHeadline: 'आपल्या परिसरात कोणतीही आपत्ती नाही.', yellowHeadline: 'काही घटनांवर लक्ष ठेवले जात आहे.', orangeHeadline: 'परिसरात वाढता धोका. सुरक्षित मार्ग तपासा.', redHeadline: '{count} गंभीर घटना सक्रिय — प्रभावित भाग टाळा.' },
+    common: { loading: 'लोड होत आहे…', retry: 'पुन्हा प्रयत्न करा', cancel: 'रद्द करा', save: 'साचवा', close: 'बंद करा', confirm: 'खात्री करा', submit: 'सबमिट करा', away: 'दूर', viewOnMap: 'नकाशावर पहा', getDirections: 'दिशा मिळवा', call: 'कॉल करा', share: 'शेअर करा', offlineBanner: 'तुम्ही ऑफलाइन आहात.', error: 'त्रुटी आली', tryAgain: 'पुन्हा प्रयत्न करा' },
+    sos: { title: 'आणीबाणी एसओएस', holdToConfirm: 'एसओएस पाठवण्यासाठी दाबा', holdInstructions: '२ सेकंद दाबून ठेवा.', typeLabel: 'आणीबाणीचा प्रकार निवडा', sent: 'एसओएस पाठवला गेला' },
+    map: { title: 'थेट आपत्ती नकाशा', planRoute: 'सुरक्षित मार्ग', origin: 'सुरवात', destination: 'गंतव्य स्थान', findRoute: 'सर्वात सुरक्षित मार्ग शोधा' },
+    shelters: { title: 'निवारे आणि सुविधा', sortedByDistance: 'अंतराने क्रमवारी लावलेले' },
+    report: { title: 'घटना नोंदवा', submit: 'रिपोर्ट सबमिट करा', submitted: 'रिपोर्ट सबमिट झाला, धन्यवाद!' },
+    broadcasts: { title: 'अधिकृत सूचना' }, family: { title: 'कुटुंब सुरक्षा', iAmSafe: 'मी सुरक्षित आहे', iNeedHelp: 'मला मदत हवी आहे' },
+    firstAid: { title: 'प्रथमोपचार मार्गदर्शक' }, assistant: { title: 'एआय आपत्ती सहाय्यक' }, admin: { title: 'प्रतिसादक डॅशबोर्ड' }, settings: { title: 'सेटिंग्ज', language: 'भाषा' },
+  },
+
+  bn: {
+    appName: 'রক্ষা', tagline: 'দুর্যোগ সাড়াদান গ্রিড',
+    nav: { map: 'মানচিত্র', sos: 'এসওএস', shelters: 'আশ্রয়কেন্দ্র', report: 'রিপোর্ট', broadcasts: 'সতর্কবার্তা', family: 'পরিবার', firstAid: 'প্রাথমিক চিকিৎসা', assistant: 'সহকারী', admin: 'অ্যাডমিন', settings: 'সেটিংস', more: 'আরও' },
+    alert: { green: 'স্বাভাবিক', yellow: 'নজরদারী', orange: 'প্রস্তুত থাকুন', red: 'পদক্ষেপ নিন', activeCount: 'সক্রিয় ঘটনা', greenHeadline: 'আপনার এলাকায় কোন সক্রিয় বিপদ নেই।', yellowHeadline: 'পরিস্থিতি পর্যবেক্ষণ করা হচ্ছে।', orangeHeadline: 'এলাকায় বিপদ বাড়ছে। নিরাপদ পথ ব্যবহার করুন।', redHeadline: '{count}টি গুরুতর ঘটনা সক্রিয় — প্রভাবিত এলাকা এড়িয়ে চলুন।' },
+    common: { loading: 'লোড হচ্ছে…', retry: 'পুনরায় চেষ্টা করুন', cancel: 'বাতিল', save: 'সংরক্ষণ', close: 'বন্ধ করুন', confirm: 'নিশ্চিত করুন', submit: 'জমা দিন', away: 'দূরে', viewOnMap: 'মানচিত্রে দেখুন', getDirections: 'দিকনির্দেশ নিন', call: 'কল করুন', share: 'শেয়ার করুন', offlineBanner: 'আপনি অফলাইনে আছেন।', error: 'কিছু সমস্যা হয়েছে', tryAgain: 'আবার চেষ্টা করুন' },
+    sos: { title: 'জরুরী এসওএস', holdToConfirm: 'এসওএস পাঠাতে চেপে ধরুন', holdInstructions: '২ সেকেন্ড চেপে রাখুন।', typeLabel: 'জরুরী পরিস্থিতির ধরন', sent: 'এসওএস পাঠানো হয়েছে' },
+    map: { title: 'লাইভ দুর্যোগ মানচিত্র', planRoute: 'নিরাপদ রুট পরিকল্পনা', origin: 'শুরু', destination: 'গন্তব্য', findRoute: 'নিরাপদ রুট খুঁজুন' },
+    shelters: { title: 'আশ্রয়কেন্দ্র ও সুবিধাসমূহ', sortedByDistance: 'দূরত্ব অনুসারে সাজানো' },
+    report: { title: 'ঘটনা রিপোর্ট করুন', submit: 'রিপোর্ট জমা দিন', submitted: 'রিপোর্ট জমা হয়েছে, ধন্যবাদ!' },
+    broadcasts: { title: 'সরকারী সতর্কবার্তা' }, family: { title: 'পরিবারের সুরক্ষা', iAmSafe: 'আমি নিরাপদ', iNeedHelp: 'আমার সাহায্য দরকার' },
+    firstAid: { title: 'প্রাথমিক চিকিৎসা গাইড' }, assistant: { title: 'এআই দুর্যোগ সহকারী' }, admin: { title: 'রেসপন্ডার ড্যাশবোর্ড' }, settings: { title: 'সেটিংস', language: 'ভাষা' },
+  },
+
+  ta: {
+    appName: 'ரக்ஷா', tagline: 'பேரிடர் மீட்பு கட்டமைப்பு',
+    nav: { map: 'வரைபடம்', sos: 'எஸ்.ஓ.எஸ்', shelters: 'முகாம்கள்', report: 'புகார்', broadcasts: 'எச்சரிக்கைகள்', family: 'குடும்பம்', firstAid: 'முதலுதவி', assistant: 'உதவியாளர்', admin: 'நிர்வாகி', settings: 'அமைப்புகள்', more: 'மேலும்' },
+    alert: { green: 'பாதுகாப்பானது', yellow: 'கண்காணிப்பு', orange: 'தயாராக இருங்கள்', red: 'உடனடி நடவடிக்கை', activeCount: 'செயலில் உள்ள சம்பவங்கள்', greenHeadline: 'உங்கள் பகுதியில் எந்த ஆபத்தும் இல்லை.', yellowHeadline: 'நிலைமை கண்காணிக்கப்படுகிறது.', orangeHeadline: 'ஆபத்து வாய்ப்பு அதிகம். பாதுகாப்பான வழிகளைப் பயன்படுத்தவும்.', redHeadline: '{count} தீவிர சம்பவங்கள் - அந்தப் பகுதிகளைத் தவிர்க்கவும்.' },
+    common: { loading: 'ஏற்றுகிறது…', retry: 'மீண்டும் முயல்க', cancel: 'ரத்து', save: 'சேமி', close: 'மூடு', confirm: 'உறுதிசெய்', submit: 'சமர்ப்பி', away: 'தொலைவில்', viewOnMap: 'வரைபடத்தில் பார்', getDirections: 'வழித்தடம் பெற', call: 'அழை', share: 'பகிர்', offlineBanner: 'நீங்கள் ஆஃப்லைனில் உள்ளீர்கள்.', error: 'பிழை ஏற்பட்டது', tryAgain: 'மீண்டும் முயல்க' },
+    sos: { title: 'அவசர எஸ்.ஓ.எஸ்', holdToConfirm: 'அனுப்ப அழுத்திப் பிடிக்கவும்', holdInstructions: '2 வினாடிகள் அழுத்திப் பிடிக்கவும்.', typeLabel: 'அவசர நிலை வகை', sent: 'எஸ்.ஓ.எஸ் அனுப்பப்பட்டது' },
+    map: { title: 'நேரலை பேரிடர் வரைபடம்', planRoute: 'பாதுகாப்பான வழித் திட்டம்', origin: 'தொடக்கம்', destination: 'செல்லுமிடம்', findRoute: 'பாதுகாப்பான வழியைக் கண்டறி' },
+    shelters: { title: 'தங்குமிடங்கள் & வசதிகள்', sortedByDistance: 'தொலைவு அடிப்படையில் வரிசைப்படுத்தப்பட்டது' },
+    report: { title: 'சம்பவத்தைப் புகாரளிக்கவும்', submit: 'சமர்ப்பிக்கவும்', submitted: 'புகார் சமர்ப்பிக்கப்பட்டது, நன்றி!' },
+    broadcasts: { title: 'அதிகாரப்பூர்வ எச்சரிக்கைகள்' }, family: { title: 'குடும்ப பாதுகாப்பு', iAmSafe: 'நான் பாதுகாப்பாக உள்ளேன்', iNeedHelp: 'எனக்கு உதவி தேவை' },
+    firstAid: { title: 'முதலுதவி வழிகாட்டி' }, assistant: { title: 'AI பேரிடர் உதவியாளர்' }, admin: { title: 'நிர்வாகி பலகை' }, settings: { title: 'அமைப்புகள்', language: 'மொழி' },
+  },
+
+  te: {
+    appName: 'రక్ష', tagline: 'విపత్తు ప్రతిస్పందన జాలం',
+    nav: { map: 'మ్యాప్', sos: 'ఎస్‌ఓఎస్', shelters: 'ఆశ్రయాలు', report: 'రిపోర్ట్', broadcasts: 'హెచ్చరికలు', family: 'కుటుంబం', firstAid: 'ప్రథమ చికిత్స', assistant: 'సహాయకుడు', admin: 'అడ్మిన్', settings: 'సెట్టింగ్‌లు', more: 'మరిన్ని' },
+    alert: { green: 'సురక్షితం', yellow: 'పరిశీలన', orange: 'సిద్ధంగా ఉండండి', red: 'చర్య తీసుకోండి', activeCount: 'చురుకైన సంఘటనలు', greenHeadline: 'మీ ప్రాంతంలో ప్రమాదాలు ఏవీ లేవు.', yellowHeadline: 'పరిస్థితిని పర్యవేక్షిస్తున్నారు.', orangeHeadline: 'ప్రమాద తీవ్రత పెరుగుతోంది. సురక్షిత మార్గాలు ఎంచుకోండి.', redHeadline: '{count} తీవ్ర సంఘటనలు ఉన్నాయి — ప్రభావిత ప్రాంతాలకు వెళ్లవద్దు.' },
+    common: { loading: 'లోడ్ అవుతోంది…', retry: 'మళ్లీ ప్రయత్నించండి', cancel: 'రద్దు', save: 'సేవ్ చేయి', close: 'మూసివేయి', confirm: 'నిర్ధారించు', submit: 'సమర్పించు', away: 'దూరంలో', viewOnMap: 'మ్యాప్‌లో చూడు', getDirections: 'దారితీసే మార్గం', call: 'కాల్ చేయి', share: 'షేర్ చేయి', offlineBanner: 'మీరు ఆఫ్‌లైన్‌లో ఉన్నారు.', error: 'పొరపాటు జరిగింది', tryAgain: 'మళ్లీ ప్రయత్నించు' },
+    sos: { title: 'అత్యవసర ఎస్‌ఓఎస్', holdToConfirm: 'పంపడానికి నొక్కి పట్టుకోండి', holdInstructions: '2 సెకన్లు నొక్కి పట్టుకోండి.', typeLabel: 'అత్యవసర రకం', sent: 'ఎస్‌ఓఎస్ పంపబడింది' },
+    map: { title: 'లైవ్ విపత్తు మ్యాప్', planRoute: 'సురక్షిత మార్గం ప్లాన్ చేయండి', origin: 'ప్రారంభం', destination: 'గమ్యం', findRoute: 'సురక్షిత మార్గం కనుగొనండి' },
+    shelters: { title: 'ఆశ్రయాలు & సదుపాయాలు', sortedByDistance: 'దూరం ప్రకారం క్రమబద్ధీకరించబడింది' },
+    report: { title: 'సంఘటనను నివేదించండి', submit: 'సమర్పించు', submitted: 'రిపోర్ట్ సమర్పించబడింది, ధన్యవాదాలు!' },
+    broadcasts: { title: 'అధికారిక హెచ్చరికలు' }, family: { title: 'కుటుంబ భద్రత', iAmSafe: 'నేను సురక్షితంగా ఉన్నాను', iNeedHelp: 'నాకు సహాయం కావాలి' },
+    firstAid: { title: 'ప్రథమ చికిత్స గైడ్' }, assistant: { title: 'AI సహాయకుడు' }, admin: { title: 'అడ్మిన్ డాష్‌బోర్డ్' }, settings: { title: 'సెట్టింగ్‌లు', language: 'భాష' },
+  },
+
+  gu: {
+    appName: 'રક્ષા', tagline: 'આપત્તિ વ્યવસ્થાપન ગ્રિડ',
+    nav: { map: 'નકશો', sos: 'એસઓએસ', shelters: 'આશ્રયસ્થાનો', report: 'રિપોર્ટ', broadcasts: 'અલર્ટ્સ', family: 'પરિવાર', firstAid: 'પ્રાથમિક સારવાર', assistant: 'સહાયક', admin: 'એડમિન', settings: 'સેટિંગ્સ', more: 'વધુ' },
+    alert: { green: 'સામાન્ય', yellow: 'નજર રાખો', orange: 'તૈયાર રહો', red: 'પગલાં લો', activeCount: 'સક્રિય ઘટનાઓ', greenHeadline: 'તમારા વિસ્તારમાં કોઈ જોખમ નથી.', yellowHeadline: 'સ્થિતિ પર નજર રખાઈ રહી છે.', orangeHeadline: 'વિસ્તારમાં જોખમ વધી રહ્યું છે. સુરક્ષિત માર્ગ પસંદ કરો.', redHeadline: '{count} ગંભીર ઘટનાઓ સક્રિય — પ્રભાવિત વિસ્તારથી દૂર રહો.' },
+    common: { loading: 'લોડ થઈ રહ્યું છે…', retry: 'ફરી પ્રયાસ કરો', cancel: 'રદ કરો', save: 'સાચવો', close: 'બંધ કરો', confirm: 'ખાતરી કરો', submit: 'સબમિટ કરો', away: 'દૂર', viewOnMap: 'નકશા પર જુઓ', getDirections: 'રસ્તો મેળવો', call: 'કૉલ કરો', share: 'શેર કરો', offlineBanner: 'તમે ઑફલાઇન છો.', error: 'ખામી સર્જાઈ', tryAgain: 'ફરી પ્રયાસ કરો' },
+    sos: { title: 'ઇમરજન્સી એસઓએસ', holdToConfirm: 'મોકલવા માટે દબાવી રાખો', holdInstructions: '૨ સેકન્ડ સુધી દબાવી રાખો.', typeLabel: 'ઇમરજન્સીનો પ્રકાર', sent: 'એસઓએસ મોકલાઈ ગયું' },
+    map: { title: 'લાઇવ આપત્તિ નકશો', planRoute: 'સુરક્ષિત માર્ગ યોજના', origin: 'શરૂઆત', destination: 'સ્થળ', findRoute: 'સૌથી સુરક્ષિત માર્ગ શોધો' },
+    shelters: { title: 'આશ્રયસ્થાનો અને સુવિધાઓ', sortedByDistance: 'અંતર મુજબ ગોઠવેલ' },
+    report: { title: 'ઘટનાની જાણ કરો', submit: 'સબમિટ કરો', submitted: 'રિપોર્ટ સબમિટ થયો, આભાર!' },
+    broadcasts: { title: 'સત્તાવાર અલર્ટ' }, family: { title: 'પરિવાર સુરેક્ષા', iAmSafe: 'હું સુરક્ષિત છું', iNeedHelp: 'મને મદદની જરૂર છે' },
+    firstAid: { title: 'પ્રાથમિક સારવાર માર્ગદર્શિકા' }, assistant: { title: 'AI સહાયક' }, admin: { title: 'એડમિન ડેશબોર્ડ' }, settings: { title: 'સેટિંગ્સ', language: 'ભાષા' },
+  },
+
+  kn: {
+    appName: 'ರಕ್ಷಾ', tagline: 'ವಿಪತ್ತು ನಿರ್ವಹಣೆ ನೆಟ್‌ವರ್ಕ್',
+    nav: { map: 'ನಕ್ಷೆ', sos: 'ಎಸ್.ಒ.ಎಸ್', shelters: 'ಆಶ್ರಯತಾಣಗಳು', report: 'ವರದಿ', broadcasts: 'ಎಚ್ಚರಿಕೆಗಳು', family: 'ಕುಟುಂಬ', firstAid: 'ಪ್ರಥಮ ಚಿಕಿತ್ಸೆ', assistant: 'ಸಹಾಯಕ', admin: 'ಅಡ್ಮಿನ್', settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', more: 'ಇನ್ನಷ್ಟು' },
+    alert: { green: 'ಸುರಕ್ಷಿತ', yellow: 'ಗಮನಿಸಿ', orange: 'ಸಿದ್ಧರಾಗಿ', red: 'ಕ್ರಮ ಕೈಗೊಳ್ಳಿ', activeCount: 'ಸಕ್ರಿಯ ಘಟನೆಗಳು', greenHeadline: 'ನಿಮ್ಮ ಪ್ರದೇಶದಲ್ಲಿ ಯಾವುದೇ ಅಪಾಯವಿಲ್ಲ.', yellowHeadline: 'పరిస్థಿತಿಯನ್ನು గమనిಸಲಾಗುತ್ತಿದೆ.', orangeHeadline: 'ಅಪಾಯದ ಪ್ರಮಾಣ ಹೆಚ್ಚುತ್ತಿದೆ. ಸುರಕ್ಷಿತ ಮಾರ್ಗ ಬಳಸಿ.', redHeadline: '{count} ತೀವ್ರ ಘಟನೆಗಳು ಸಕ್ರಿಯವಾಗಿವೆ — ಆ ಪ್ರದೇಶಗಳನ್ನು ತಪ್ಪಿಸಿ.' },
+    common: { loading: 'ಲೋಡ್ ಆಗುತ್ತಿದೆ…', retry: 'ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ', cancel: 'ರದ್ದು', save: 'ಉಳಿಸಿ', close: 'ಮುಚ್ಚಿ', confirm: 'ಖಚಿತಪಡಿಸಿ', submit: 'ಸಲ್ಲಿಸಿ', away: 'ದೂರದಲ್ಲಿ', viewOnMap: 'ನಕ್ಷೆಯಲ್ಲಿ ವೀಕ್ಷಿಸಿ', getDirections: 'ದಾರಿ ಪಡೆಯಿರಿ', call: 'ಕರೆ ಮಾಡಿ', share: 'ಹಂಚಿಕೊಳ್ಳಿ', offlineBanner: 'ನೀವು ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿದ್ದೀರಿ.', error: 'ದೋಷ ಸಂಭವಿಸಿದೆ', tryAgain: 'ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ' },
+    sos: { title: 'ತುರ್ತು ಎಸ್.ಒ.ಎಸ್', holdToConfirm: 'ಕಳುಹಿಸಲು ಒತ್ತಿ ಹಿಡಿಯಿರಿ', holdInstructions: '2 ಸೆಕೆಂಡುಗಳ ಕಾಲ ಒತ್ತಿ ಹಿಡಿಯಿರಿ.', typeLabel: 'ತುರ್ತುಸ್ಥಿತಿಯ ಮಾದರಿ', sent: 'ಎಸ್.ಒ.ಎಸ್ ಕಳುಹಿಸಲಾಗಿದೆ' },
+    map: { title: 'ಲೈವ್ ವಿಪತ್ತು ನಕ್ಷೆ', planRoute: 'ಸುರಕ್ಷಿತ ಮಾರ್ಗ ಯೋಜನೆ', origin: 'ಆರಂಭ', destination: 'ಗಮ್ಯಸ್ಥಾನ', findRoute: 'ಸುರಕ್ಷಿತ ಮಾರ್ಗ ಹುಡುಕಿ' },
+    shelters: { title: 'ಆಶ್ರಯತಾಣಗಳು & ಸೌಲಭ್ಯಗಳು', sortedByDistance: 'ದೂರದ ಆಧಾರದ ಮೇಲೆಂಗಡಿಸಲಾಗಿದೆ' },
+    report: { title: 'ಘಟನೆಯನ್ನು ವರದಿ ಮಾಡಿ', submit: 'ಸಲ್ಲಿಸಿ', submitted: 'ವರದಿ ಸಲ್ಲಿಸಲಾಗಿದೆ, ಧನ್ಯವಾದಗಳು!' },
+    broadcasts: { title: 'ಅಧಿಕೃತ ಎಚ್ಚರಿಕೆಗಳು' }, family: { title: 'ಕುಟುಂಬದ ಸುರಕ್ಷತೆ', iAmSafe: 'ನಾನು ಸುರಕ್ಷಿತವಾಗಿದ್ದೇನೆ', iNeedHelp: 'ನನಗೆ ಸಹಾಯ ಬೇಕು' },
+    firstAid: { title: 'ಪ್ರಥಮ ಚಿಕಿತ್ಸಾ ಮಾರ್ಗದರ್ಶಿ' }, assistant: { title: 'AI ಸಹಾಯಕ' }, admin: { title: 'ಅಡ್ಮಿನ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್' }, settings: { title: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', language: 'ಭಾಷೆ' },
+  },
+
+  ml: {
+    appName: 'രക്ഷ', tagline: 'ദുരന്ത നിവാരണ ശൃംഖല',
+    nav: { map: 'മാപ്പ്', sos: 'എസ്.ഒ.എസ്', shelters: 'ആശ്വാസ കേന്ദ്രങ്ങൾ', report: 'റിപ്പോർട്ട്', broadcasts: 'മുന്നറിയിപ്പുകൾ', family: 'കുടുംബം', firstAid: 'പ്രഥമ ശുശ്രൂഷ', assistant: 'സഹായി', admin: 'അഡ്മിൻ', settings: 'ക്രമീകരണങ്ങൾ', more: 'കൂടുതൽ' },
+    alert: { green: 'സുരക്ഷിതം', yellow: 'ജാഗ്രത', orange: 'തയ്യാറെടുക്കുക', red: 'നടപടി സ്വീകരിക്കുക', activeCount: 'സജീവ സംഭവങ്ങൾ', greenHeadline: 'നിങ്ങളുടെ പ്രദേശത്ത് അപകടങ്ങളൊന്നുമില്ല.', yellowHeadline: 'സാഹചര്യം നിരീക്ഷിച്ചു വരുന്നു.', orangeHeadline: 'അപകട സാധ്യത വർദ്ധിക്കുന്നു. സുരക്ഷിത പാത തിരഞ്ഞെടുക്കുക.', redHeadline: '{count} ഗുരുതര സംഭവങ്ങൾ — ആ പ്രദേശങ്ങൾ ഒഴിവാക്കുക.' },
+    common: { loading: 'ലോഡ് ചെയ്യുന്നു…', retry: 'വീണ്ടും ശ്രമിക്കുക', cancel: 'റദ്ദാക്കുക', save: 'സേവ് ചെയ്യുക', close: 'അടയ്ക്കുക', confirm: 'ഉറപ്പാക്കുക', submit: 'സമർപ്പിക്കുക', away: 'അകലെ', viewOnMap: 'മാപ്പിൽ കാണുക', getDirections: 'വഴി മനസ്സിലാക്കുക', call: 'വിളിക്കുക', share: 'പങ്കുവെക്കുക', offlineBanner: 'നിങ്ങൾ ഓഫ്‌ലൈനിലാണ്.', error: 'തടസ്സം നേരിട്ടു', tryAgain: 'വീണ്ടും ശ്രമിക്കുക' },
+    sos: { title: 'അടിയന്തര എസ്.ഒ.എസ്', holdToConfirm: 'അയക്കാൻ അമർത്തിപ്പിടിക്കുക', holdInstructions: '2 സെക്കൻഡ് അമർത്തിപ്പിടിക്കുക.', typeLabel: 'അടിയന്തര അവസ്ഥ', sent: 'എസ്.ഒ.എസ് അയച്ചു' },
+    map: { title: 'തത്സമയ ദുരന്ത മാപ്പ്', planRoute: 'സുരക്ഷിത പാത ആസൂത്രണം', origin: 'തുടക്കം', destination: 'ലക്ഷ്യസ്ഥാനം', findRoute: 'സുരക്ഷിത പാത കണ്ടെത്തുക' },
+    shelters: { title: 'അഭയകേന്ദ്രങ്ങൾ & സൗകര്യങ്ങൾ', sortedByDistance: 'ദൂര ക്രമത്തിൽ നൽകിയിരിക്കുന്നു' },
+    report: { title: 'സംഭവം റിപ്പോർട്ട് ചെയ്യുക', submit: 'സമർപ്പിക്കുക', submitted: 'റിപ്പോർട്ട് സമർപ്പിച്ചു, നന്ദി!' },
+    broadcasts: { title: 'ഔദ്യോഗിക അറിയിപ്പുകൾ' }, family: { title: 'കുടുംബ സുരക്ഷ', iAmSafe: 'ഞാൻ സുരക്ഷിതനാണ്', iNeedHelp: 'എനിക്ക് സഹായം വേണം' },
+    firstAid: { title: 'പ്രഥമ ശുശ്രൂഷാ സഹായി' }, assistant: { title: 'AI സഹായി' }, admin: { title: 'അഡ്മിൻ പാനൽ' }, settings: { title: 'ക്രമീകരണങ്ങൾ', language: 'ഭാഷ' },
+  },
+
+  pa: {
+    appName: 'ਰਕਸ਼ਾ', tagline: 'ਆਫ਼ਤ ਪ੍ਰਬੰਧਨ ਨੈੱਟਵਰਕ',
+    nav: { map: 'ਨਕਸ਼ਾ', sos: 'ਐਸ.ਓ.ਐਸ', shelters: 'ਸ਼ਰਨਗਾਹਾਂ', report: 'ਰਿਪੋਰਟ', broadcasts: 'ਅਲਰਟ', family: 'ਪਰਿਵਾਰ', firstAid: 'ਮੁੱਢਲੀ ਸਹਾਇਤਾ', assistant: 'ਸਹਾਇਕ', admin: 'ਐਡਮਿਨ', settings: 'ਸੈਟਿੰਗਾਂ', more: 'ਹੋਰ' },
+    alert: { green: 'ਸੁਰੱਖਿਅਤ', yellow: 'ਨਿਗਰਾਨੀ', orange: 'ਤਿਆਰ ਰਹੋ', red: 'ਕਾਰਵਾਈ ਕਰੋ', activeCount: 'ਸਰਗਰਮ ਘਟਨਾਵਾਂ', greenHeadline: 'ਤੁਹਾਡੇ ਖੇਤਰ ਵਿੱਚ ਕੋਈ ਖਤਰਾ ਨਹੀਂ ਹੈ।', yellowHeadline: 'ਹਾਲਾਤ ਤੇ ਨਜ਼ਰ ਰੱਖੀ ਜਾ ਰਹੀ ਹੈ।', orangeHeadline: 'ਖੇਤਰ ਵਿੱਚ ਖਤਰਾ ਵਧ ਰਿਹਾ ਹੈ। ਸੁਰੱਖਿਅਤ ਰਸਤਾ ਚੁਣੋ।', redHeadline: '{count} ਗੰਭੀਰ ਘਟਨਾਵਾਂ — ਪ੍ਰਭਾਵਿਤ ਇਲਾਕਿਆਂ ਤੋਂ ਬਚੋ।' },
+    common: { loading: 'ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…', retry: 'ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ', cancel: 'ਰੱਦ ਕਰੋ', save: 'ਸੰਭਾਲੋ', close: 'ਬੰਦ ਕਰੋ', confirm: 'ਪੁਸ਼ਟੀ ਕਰੋ', submit: 'ਜਮ੍ਹਾਂ ਕਰੋ', away: 'ਦੂਰ', viewOnMap: 'ਨਕਸ਼ੇ ਤੇ ਦੇਖੋ', getDirections: 'ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ ਲਵੋ', call: 'ਕਾਲ ਕਰੋ', share: 'ਸਾਂਝਾ ਕਰੋ', offlineBanner: 'ਤੁਸੀਂ ਔਫਲਾਈਨ ਹੋ।', error: 'ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ', tryAgain: 'ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ' },
+    sos: { title: 'ਐਮਰਜੈਂਸੀ ਐਸ.ਓ.ਐਸ', holdToConfirm: 'ਭੇਜਣ ਲਈ ਦਬਾ ਕੇ ਰੱਖੋ', holdInstructions: '2 ਸਕਿੰਟ ਲਈ ਦਬਾ ਕੇ ਰੱਖੋ।', typeLabel: 'ਐਮਰਜੈਂਸੀ ਦੀ ਕਿਸਮ', sent: 'ਐਸ.ਓ.ਐਸ ਭੇਜਿਆ ਗਿਆ' },
+    map: { title: 'ਲਾਈਵ ਆਫ਼ਤ ਨਕਸ਼ਾ', planRoute: 'ਸੁਰੱਖਿਅਤ ਰਸਤਾ ਯੋਜਨਾ', origin: 'ਸ਼ੁਰੂਆਤ', destination: 'ਮੰਜ਼ਿਲ', findRoute: 'ਸਭ ਤੋਂ ਸੁਰੱਖਿਅਤ ਰਸਤਾ ਲੱਭੋ' },
+    shelters: { title: 'ਸ਼ਰਨਗਾਹਾਂ ਅਤੇ ਸਹੂਲਤਾਂ', sortedByDistance: 'ਦੂਰੀ ਅਨੁਸਾਰ ਤਰਤੀਬਬੱਧ' },
+    report: { title: 'ਘਟਨਾ ਦੀ ਰਿਪੋਰਟ ਕਰੋ', submit: 'ਜਮ੍ਹਾਂ ਕਰੋ', submitted: 'ਰਿਪੋਰਟ ਦਰਜ ਹੋ ਗਈ, ਧੰਨਵਾਦ!' },
+    broadcasts: { title: 'ਸਰਕਾਰੀ ਅਲਰਟ' }, family: { title: 'ਪਰਿਵਾਰਕ ਸੁਰੱਖਿਆ', iAmSafe: 'ਮੈਂ ਸੁਰੱਖਿਅਤ ਹਾਂ', iNeedHelp: 'ਮੈਨੂੰ ਮਦਦ ਚਾਹੀਦੀ ਹੈ' },
+    firstAid: { title: 'ਮੁੱਢਲੀ ਸਹਾਇਤਾ ਗਾਈਡ' }, assistant: { title: 'AI ਆਫ਼ਤ ਸਹਾਇਕ' }, admin: { title: 'ਐਡਮਿਨ ਡੈਸ਼ਬੋਰਡ' }, settings: { title: 'ਸੈਟਿੰਗਾਂ', language: 'ਭਾਸ਼ਾ' },
+  },
+
+  or: {
+    appName: 'ରକ୍ଷା', tagline: 'ବିପର୍ଯ୍ୟୟ ପ୍ରଶମନ ନେଟୱାର୍କ',
+    nav: { map: 'ମାନଚିତ୍ର', sos: 'ଏସଓଏସ', shelters: 'ଆଶ୍ରୟସ୍ଥଳ', report: 'ରିପୋର୍ଟ', broadcasts: 'ସୂଚନା', family: 'ପରିବାର', firstAid: 'ପ୍ରାଥମିକ ଚିକିତ୍ସା', assistant: 'ସହାୟକ', admin: 'ଆଡମିନ', settings: 'ସେଟିଂସ', more: 'ଅଧିକ' },
+    alert: { green: 'ସୁରକ୍ଷିତ', yellow: 'ନଜର ରଖନ୍ତୁ', orange: 'ପ୍ରସ୍ତୁତ ରୁହନ୍ତୁ', red: 'ପଦକ୍ଷେପ ନିଅନ୍ତୁ', activeCount: 'ସକ୍ରିୟ ଘଟଣା', greenHeadline: 'ଆପଣଙ୍କ ଅଞ୍ଚଳରେ କୌଣସି ବିପଦ ନାହିଁ।', yellowHeadline: 'ସ୍ଥିତି ଉପରେ ନଜର ରଖାଯାଇଛି।', orangeHeadline: 'ଅଞ୍ଚଳରେ ବିପଦ ବଢୁଛି। ସୁରକ୍ଷିତ ରାସ୍ତା ବାଛନ୍ତୁ।', redHeadline: '{count}ଟି ଗମ୍ଭୀର ଘଟଣା — ସେହି ସ୍ଥାନରୁ ଦୂରେଇ ରୁହନ୍ତୁ।' },
+    common: { loading: 'ଲୋଡ୍ ହେଉଛି…', retry: 'ପୁନଃ ଚେଷ୍ଟା କରନ୍ତୁ', cancel: 'ବାତିଲ୍', save: 'ସଞ୍ଚୟ କରନ୍ତୁ', close: 'ବନ୍ଦ କରନ୍ତୁ', confirm: 'ନିଶ୍ଚିତ କରନ୍ତୁ', submit: 'ଦାଖଲ କରନ୍ତୁ', away: 'ଦୂରରେ', viewOnMap: 'ମାନଚିତ୍ରରେ ଦେଖନ୍ତୁ', getDirections: 'ରାସ୍ତା ଦେଖନ୍ତୁ', call: 'କଲ୍ କରନ୍ତୁ', share: 'ସେୟାର କରନ୍ତୁ', offlineBanner: 'ଆପଣ ଅଫଲାଇନ ଅଛନ୍ତି।', error: 'କିଛି ତ୍ରୁଟି ଘଟିଲା', tryAgain: 'ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ' },
+    sos: { title: 'ଜରୁରୀକାଳୀନ ଏସଓଏସ', holdToConfirm: 'ପଠାଇବା ପାଇଁ ଚାପି ଧରନ୍ତୁ', holdInstructions: '୨ ସେକେଣ୍ଡ ଧରି ରଖନ୍ତୁ।', typeLabel: 'ଆପତକାଳୀନ ପ୍ରକାର', sent: 'ଏସଓଏସ ପଠାଗଲା' },
+    map: { title: 'ଲାଇଭ ବିପର୍ଯ୍ୟୟ ମାନଚିତ୍ର', planRoute: 'ସୁରକ୍ଷିତ ରାସ୍ତା ଯୋଜନା', origin: 'ଆରମ୍ଭ', destination: 'ଗନ୍ତବ୍ୟସ୍ଥଳ', findRoute: 'ସୁରକ୍ଷିତ ରାସ୍ତା ଖୋଜନ୍ତୁ' },
+    shelters: { title: 'ଆଶ୍ରୟସ୍ଥଳ ଓ ସୁବିଧା', sortedByDistance: 'ଦୂରତା ଅନୁସାରେ ସଜାଯାଇଛି' },
+    report: { title: 'ଘଟଣା ରିପୋର୍ଟ କରନ୍ତୁ', submit: 'ଦାଖଲ କରନ୍ତୁ', submitted: 'ରିପୋର୍ଟ ଦାଖଲ ହେଲା, ଧନ୍ୟବାଦ!' },
+    broadcasts: { title: 'ସରକାରୀ ସୂଚନା' }, family: { title: 'ପରିବାର ସୁରକ୍ଷା', iAmSafe: 'ମୁଁ ସୁରକ୍ଷିତ ଅଛି', iNeedHelp: 'ମୋତେ ସାହାଯ୍ୟ ଦରକାର' },
+    firstAid: { title: 'ପ୍ରାଥମିକ ଚିକିତ୍ସା ଗାଇଡ୍' }, assistant: { title: 'AI ସହାୟକ' }, admin: { title: 'ଆଡମିନ ଡ୍ୟାସବୋର୍ଡ' }, settings: { title: 'ସେଟିଂସ', language: 'ଭାଷା' },
+  },
+
+  as: {
+    appName: 'ৰক্ষা', tagline: 'দুর্যোগ ব্যৱস্থাপনা গ্ৰীড',
+    nav: { map: 'মানচিত্ৰ', sos: 'এছ.অ\'.এছ', shelters: 'আশ্রয়শিবিৰ', report: 'প্রতিবেদন', broadcasts: 'সতৰ্কবাৰ্তা', family: 'পৰিয়াল', firstAid: 'প্রাথমিক চিকিৎসা', assistant: 'সহায়ক', admin: 'এডমিন', settings: 'ছেটিংছ', more: 'অধিক' },
+    alert: { green: 'সুৰক্ষিত', yellow: 'নজৰ ৰাখক', orange: 'প্ৰস্তুত থাকক', red: 'পদক্ষেপ লওক', activeCount: 'সক্ৰিয় ঘটনা', greenHeadline: 'আপোনাৰ অঞ্চলত কোনো বিপদ নাই।', yellowHeadline: 'পরিস্থিতি নিৰীক্ষণ কৰা হৈছে।', orangeHeadline: 'অঞ্চলটোত বিপদ বৃদ্ধি পাইছে। সুৰক্ষিত পথ বাছক।', redHeadline: '{count}টা গুৰুতৰ ঘটনা — সেই অঞ্চলসমূহ পৰিহাৰ কৰক।' },
+    common: { loading: 'ল\'ড হৈ আছে…', retry: 'পুনৰ চেষ্টা কৰক', cancel: 'বাতিল', save: 'সংৰক্ষণ কৰক', close: 'বন্ধ কৰক', confirm: 'নিশ্চিত কৰক', submit: 'জমা দিয়ক', away: 'আঁতৰত', viewOnMap: 'মানচিত্ৰত চাওক', getDirections: 'পথ বিচাৰক', call: 'কল কৰক', share: 'শ্বেয়াৰ কৰক', offlineBanner: 'আপুনি অফলাইনত আছে।', error: 'ত্রুটি হৈছে', tryAgain: 'পুনৰ চেষ্টা কৰক' },
+    sos: { title: 'জৰুৰীকালীন এছ.অ\'.এছ', holdToConfirm: 'পঠিয়াবলৈ টিপি ৰাখক', holdInstructions: '২ ছেকেণ্ড টিপি ৰাখক।', typeLabel: 'জৰুৰী অৱস্থাৰ প্ৰকাৰ', sent: 'এছ.অ\'.এছ প্ৰেৰণ কৰা হ\'ল' },
+    map: { title: 'লাইভ দুর্যোগ মানচিত্ৰ', planRoute: 'সুৰক্ষিত পথ পৰিকল্পনা', origin: 'আৰম্ভণি', destination: 'গন্তব্য', findRoute: 'সুৰক্ষিত পথ বিচাৰক' },
+    shelters: { title: 'আশ্রয়শিবিৰ আৰু সুবিধাসমূহ', sortedByDistance: 'দূৰত্ব অনুসৰি সজাই থোৱা' },
+    report: { title: 'ঘটনাৰ ৰিপ\'ৰ্ট কৰক', submit: 'জমা দিয়ক', submitted: 'ৰিপ\'ৰ্ট জমা হ\'ল, ধন্যবাদ!' },
+    broadcasts: { title: 'চৰকাৰী সতৰ্কবাৰ্তা' }, family: { title: 'পৰিয়ালৰ সুৰক্ষা', iAmSafe: 'মই সুৰক্ষিত', iNeedHelp: 'মোৰ সহায় লাগে' },
+    firstAid: { title: 'প্রাথমিক চিকিৎসা গাইড' }, assistant: { title: 'AI সহায়ক' }, admin: { title: 'এডমিন ডেশ্বব\'ৰ্ড' }, settings: { title: 'ছেটিংছ', language: 'ভাষা' },
+  },
+
+  ur: {
+    appName: 'رکشا', tagline: 'آفت رسپانس گرڈ',
+    nav: { map: 'نقشہ', sos: 'ایس او ایس', shelters: 'پناہ گاہیں', report: 'رپورٹ', broadcasts: 'الرٹس', family: 'خاندان', firstAid: 'طبی امداد', assistant: 'معاون', admin: 'ایڈمن', settings: 'سیٹنگز', more: 'مزید' },
+    alert: { green: 'محفوظ', yellow: 'نگرانی', orange: 'توجہ دیں', red: 'فوری اقدام', activeCount: 'فعال واقعات', greenHeadline: 'آپ کے علاقے میں کوئی خطرہ نہیں ہے۔', yellowHeadline: 'صورتحال پر نظر رکھی جا رہی ہے۔', orangeHeadline: 'علاقے میں خطرہ بڑھ رہا ہے۔ محفوظ راستہ اختیار کریں۔', redHeadline: '{count} شدید واقعات فعال ہیں — متاثرہ علاقوں سے پرہیز کریں۔' },
+    common: { loading: 'لوڈ ہو رہا ہے…', retry: 'دوبارہ کوشش کریں', cancel: 'منسوخ', save: 'محفوظ کریں', close: 'بند کریں', confirm: 'تصدیق کریں', submit: 'جمع کریں', away: 'دور', viewOnMap: 'نقشے پر دیکھیں', getDirections: 'راستہ دیکھیں', call: 'کال کریں', share: 'شیئر کریں', offlineBanner: 'آپ آف لائن ہیں۔', error: 'کچھ غلط ہو گیا', tryAgain: 'دوبارہ کوشش کریں' },
+    sos: { title: 'ہنگامی ایس او ایس', holdToConfirm: 'بھیجنے کے لیے دبائے رکھیں', holdInstructions: '2 سیکنڈ تک دبائے رکھیں۔', typeLabel: 'ہنگامی صورتحال کی قسم', sent: 'ایس او ایس بھیج دیا گیا' },
+    map: { title: 'لائیو آفت نقشہ', planRoute: 'محفوظ راستہ کا منصوبہ', origin: 'شروعات', destination: 'منزل', findRoute: 'محفوظ ترین راستہ تلاش کریں' },
+    shelters: { title: 'پناہ گاہیں اور سہولیات', sortedByDistance: 'فاصلے کے لحاظ سے ترتیب شدہ' },
+    report: { title: 'واقعہ کی رپورٹ کریں', submit: 'جمع کریں', submitted: 'رپورٹ جمع ہو گئی، شکریہ!' },
+    broadcasts: { title: 'سرکاری الرٹس' }, family: { title: 'خاندانی تحفظ', iAmSafe: 'میں محفوظ ہوں', iNeedHelp: 'مجھے مدد چاہیے' },
+    firstAid: { title: 'ابتدائی طبی امدادی گائیڈ' }, assistant: { title: 'AI معاون' }, admin: { title: 'ایڈمن ڈیش بورڈ' }, settings: { title: 'سیٹنگز', language: 'زبان' },
+  },
+
+  es: {
+    appName: 'RAKSHA', tagline: 'Red de Respuesta ante Desastres',
+    nav: { map: 'Mapa', sos: 'SOS', shelters: 'Refugios', report: 'Reportar', broadcasts: 'Alertas', family: 'Familia', firstAid: 'Primeros Auxilios', assistant: 'Asistente', admin: 'Admin', settings: 'Ajustes', more: 'Más' },
+    alert: { green: 'Sin Peligro', yellow: 'Vigilancia', orange: 'Prepárese', red: 'Tome Acción', activeCount: 'incidente(s) activo(s)', greenHeadline: 'No hay peligros reportados en su área.', yellowHeadline: 'Informes aislados bajo monitoreo.', orangeHeadline: 'Actividad de peligro elevada. Revise rutas seguras.', redHeadline: '{count} incidente(s) grave(s) activo(s) — evite las zonas afectadas.' },
+    common: { loading: 'Cargando…', retry: 'Reintentar', cancel: 'Cancelar', save: 'Guardar', close: 'Cerrar', confirm: 'Confirmar', submit: 'Enviar', away: 'de distancia', viewOnMap: 'Ver en mapa', getDirections: 'Obtener ruta', call: 'Llamar', share: 'Compartir', offlineBanner: 'Sin conexión — mostrando datos guardados.', error: 'Algo salió mal', tryAgain: 'Intentar de nuevo' },
+    sos: { title: 'SOS de Emergencia', holdToConfirm: 'MANTENGA PRESIONADO', holdInstructions: 'Mantenga presionado 2s para enviar su ubicación.', typeLabel: '¿Qué tipo de emergencia es?', sent: 'SOS enviado — ubicación visible a rescatistas' },
+    map: { title: 'Mapa de Desastres en Vivo', planRoute: 'Planificar ruta segura', origin: 'Origen', destination: 'Destino', findRoute: 'Buscar ruta más segura' },
+    shelters: { title: 'Refugios y Servicios', sortedByDistance: 'Ordenado por distancia' },
+    report: { title: 'Reportar Incidente', submit: 'Enviar reporte', submitted: 'Reporte enviado — ¡gracias!' },
+    broadcasts: { title: 'Alertas Oficiales' }, family: { title: 'Seguridad Familiar', iAmSafe: 'Estoy a salvo', iNeedHelp: 'Necesito ayuda' },
+    firstAid: { title: 'Guía de Primeros Auxilios' }, assistant: { title: 'Asistente IA de Peligros' }, admin: { title: 'Panel de Control' }, settings: { title: 'Ajustes', language: 'Idioma' },
+  },
+
+  fr: {
+    appName: 'RAKSHA', tagline: 'Réseau de Réponse aux Catastrophes',
+    nav: { map: 'Carte', sos: 'SOS', shelters: 'Refuges', report: 'Signaler', broadcasts: 'Alertes', family: 'Famille', firstAid: 'Secourisme', assistant: 'Assistant', admin: 'Admin', settings: 'Paramètres', more: 'Plus' },
+    alert: { green: 'Aucun Danger', yellow: 'Vigilance', orange: 'Soyez Prêt', red: 'Alerte Maximale', activeCount: 'incident(s) actif(s)', greenHeadline: 'Aucun danger signalé dans votre zone.', yellowHeadline: 'Rapports isolés sous surveillance.', orangeHeadline: 'Activité dangereuse en hausse. Vérifiez les itinéraires.', redHeadline: '{count} incident(s) grave(s) actif(s) — évitez les zones touchées.' },
+    common: { loading: 'Chargement…', retry: 'Réessayer', cancel: 'Annuler', save: 'Enregistrer', close: 'Fermer', confirm: 'Confirmer', submit: 'Envoyer', away: 'de distance', viewOnMap: 'Voir sur la carte', getDirections: 'Obtenir l’itinéraire', call: 'Appeler', share: 'Partager', offlineBanner: 'Hors ligne — affichage des données téléchargées.', error: 'Une erreur est survenue', tryAgain: 'Réessayer' },
+    sos: { title: 'SOS Urgence', holdToConfirm: 'MAINTENIR POUR ENVOYER', holdInstructions: 'Maintenez pendant 2s pour envoyer votre position.', typeLabel: 'Quel type d’urgence ?', sent: 'SOS envoyé — position visible par les secours' },
+    map: { title: 'Carte des Catastrophes en Direct', planRoute: 'Planifier un itinéraire sûr', origin: 'Départ', destination: 'Arrivée', findRoute: 'Trouver l’itinéraire le plus sûr' },
+    shelters: { title: 'Refuges et Infrastructures', sortedByDistance: 'Trié par distance' },
+    report: { title: 'Signaler un Incident', submit: 'Envoyer le rapport', submitted: 'Rapport envoyé — merci !' },
+    broadcasts: { title: 'Alertes Officielles' }, family: { title: 'Sécurité Familiale', iAmSafe: 'Je suis en sécurité', iNeedHelp: 'J’ai besoin d’aide' },
+    firstAid: { title: 'Guide de Premier Secours' }, assistant: { title: 'Assistant IA Catastrophes' }, admin: { title: 'Tableau de Bord Rescop' }, settings: { title: 'Paramètres', language: 'Langue' },
+  },
+
+  de: {
+    appName: 'RAKSHA', tagline: 'Katastrophenschutz-Netzwerk',
+    nav: { map: 'Karte', sos: 'SOS', shelters: 'Notunterkünfte', report: 'Melden', broadcasts: 'Warnungen', family: 'Familie', firstAid: 'Erste Hilfe', assistant: 'Assistent', admin: 'Admin', settings: 'Einstellungen', more: 'Mehr' },
+    alert: { green: 'Entwarnung', yellow: 'Beobachtung', orange: 'Vorbereiten', red: 'Handeln', activeCount: 'aktive Vorfälle', greenHeadline: 'Keine Gefahren in Ihrer Nähe gemeldet.', yellowHeadline: 'Einzelfälle werden überwacht.', orangeHeadline: 'Erhöhte Gefahr. Sichere Routen prüfen.', redHeadline: '{count} schwere Vorfälle — betroffene Gebiete meiden.' },
+    common: { loading: 'Laden…', retry: 'Wiederholen', cancel: 'Abbrechen', save: 'Speichern', close: 'Schließen', confirm: 'Bestätigen', submit: 'Absenden', away: 'entfernt', viewOnMap: 'Auf Karte zeigen', getDirections: 'Route anzeigen', call: 'Anrufen', share: 'Teilen', offlineBanner: 'Offline — gespeicherte Daten werden angezeigt.', error: 'Fehler aufgetreten', tryAgain: 'Erneut versuchen' },
+    sos: { title: 'Notfall SOS', holdToConfirm: 'GEDRÜCKT HALTEN', holdInstructions: '2 Sekunden gedrückt halten.', typeLabel: 'Art des Notfalls?', sent: 'SOS gesendet — Standort für Helfer sichtbar' },
+    map: { title: 'Live-Katastrophenkarte', planRoute: 'Sichere Route planen', origin: 'Start', destination: 'Ziel', findRoute: 'Sicherste Route finden' },
+    shelters: { title: 'Unterkünfte & Einrichtungen', sortedByDistance: 'Nach Entfernung sortiert' },
+    report: { title: 'Vorfall melden', submit: 'Meldung absenden', submitted: 'Meldung gesendet — Danke!' },
+    broadcasts: { title: 'Offizielle Warnungen' }, family: { title: 'Familiensicherheit', iAmSafe: 'Ich bin sicher', iNeedHelp: 'Ich brauche Hilfe' },
+    firstAid: { title: 'Erste-Hilfe-Leitfaden' }, assistant: { title: 'KI-Gefahrenassistent' }, admin: { title: 'Einsatzleitstand' }, settings: { title: 'Einstellungen', language: 'Sprache' },
+  },
+
+  ar: {
+    appName: 'ركشا', tagline: 'شبكة الاستجابة للكوارث',
+    nav: { map: 'الخريطة', sos: 'طوارئ', shelters: 'الملاجئ', report: 'بلاغ', broadcasts: 'التنبيهات', family: 'العائلة', firstAid: 'الإسعافات', assistant: 'المساعد', admin: 'المسؤول', settings: 'الإعدادات', more: 'المزيد' },
+    alert: { green: 'آمن', yellow: 'مراقبة', orange: 'استعد', red: 'تحرك فوراً', activeCount: 'حوادث نشطة', greenHeadline: 'لا يوجد خطر مسجل في منطقتك.', yellowHeadline: 'تقارير منفصلة قيد المتابعة.', orangeHeadline: 'خطر مرتفع. راجع الطرق الآمنة.', redHeadline: '{count} حوادث خطيرة — تجنب المناطق المتأثرة.' },
+    common: { loading: 'جار التحميل…', retry: 'إعادة المحاولة', cancel: 'إلغاء', save: 'حفظ', close: 'إغلاق', confirm: 'تأكيد', submit: 'إرسال', away: 'بعيد', viewOnMap: 'عرض على الخريطة', getDirections: 'احصل على الاتجاهات', call: 'اتصال', share: 'مشاركة', offlineBanner: 'أنت غير متصل — يتم عرض البيانات المخزنة.', error: 'حدث خطأ ما', tryAgain: 'حاول مجدداً' },
+    sos: { title: 'نداء استغاثة طارئ', holdToConfirm: 'اضغط مع الاستمرار', holdInstructions: 'اضغط لمدة ثانتين لإرسال موقعك.', typeLabel: 'ما نوع الطوارئ؟', sent: 'تم إرسال الاستغاثة — موقعك مرئي لفرق الإنقاذ' },
+    map: { title: 'خريطة الكوارث المباشرة', planRoute: 'تخطيط طريق آمن', origin: 'الانطلاق', destination: 'الوجهة', findRoute: 'البحث عن أأمن طريق' },
+    shelters: { title: 'الملاجئ والمرافق', sortedByDistance: 'مرتبة حسب المسافة' },
+    report: { title: 'الإبلاغ عن حادث', submit: 'إرسال البلاغ', submitted: 'تم إرسال البلاغ — شكراً لك!' },
+    broadcasts: { title: 'تنبيهات رسمية' }, family: { title: 'سلامة العائلة', iAmSafe: 'أنا بخير', iNeedHelp: 'أحتاج مساعدة' },
+    firstAid: { title: 'دليل الإسعافات الأولية' }, assistant: { title: 'مساعد الذكاء الاصطناعي' }, admin: { title: 'لوحة التحكم' }, settings: { title: 'الإعدادات', language: 'اللغة' },
+  },
+
+  zh: {
+    appName: 'RAKSHA 灾防', tagline: '灾害应急响应网格',
+    nav: { map: '地图', sos: '求救', shelters: '避难所', report: '上报', broadcasts: '预警', family: '家人', firstAid: '急救', assistant: '助手', admin: '管理', settings: '设置', more: '更多' },
+    alert: { green: '安全', yellow: '预警', orange: '防范', red: '紧急响应', activeCount: '起活跃事件', greenHeadline: '您所在区域目前无灾情报告。', yellowHeadline: '局部事件监控中，暂无需特殊行动。', orangeHeadline: '区域灾情上升，外出前请查阅安全路线。', redHeadline: '{count} 起严重事件 — 请避开受灾区域。' },
+    common: { loading: '加载中…', retry: '重试', cancel: '取消', save: '保存', close: '关闭', confirm: '确认', submit: '提交', away: '距离', viewOnMap: '地图查看', getDirections: '获取路线', call: '拨打电话', share: '分享', offlineBanner: '您已离线 — 显示上次下载的数据。', error: '发生错误', tryAgain: '再试一次' },
+    sos: { title: '紧急求救 SOS', holdToConfirm: '长按发送 SOS', holdInstructions: '长按 2 秒向救援人员发送实时位置。', typeLabel: '请选择紧急情况类型', sent: 'SOS 已发送 — 救援人员可见' },
+    map: { title: '实时灾情地图', planRoute: '规划安全路线', origin: '起点', destination: '终点', findRoute: '寻找最安全路线' },
+    shelters: { title: '避难所与设施', sortedByDistance: '按距离排序' },
+    report: { title: '上报灾情', submit: '提交报告', submitted: '报告已提交 — 感谢您的帮助！' },
+    broadcasts: { title: '官方预警播报' }, family: { title: '家庭安全', iAmSafe: '我安全', iNeedHelp: '需要帮助' },
+    firstAid: { title: '急救指南' }, assistant: { title: 'AI 灾害助手' }, admin: { title: '救援指挥面板' }, settings: { title: '设置', language: '语言' },
+  },
+
+  ja: {
+    appName: 'RAKSHA', tagline: '災害レスポンス・グリッド',
+    nav: { map: 'マップ', sos: 'SOS', shelters: '避難所', report: '通報', broadcasts: '警報', family: '家族', firstAid: '応急手当', assistant: 'AI助手', admin: '管理者', settings: '設定', more: 'その他' },
+    alert: { green: '正常', yellow: '注意', orange: '警戒', red: '避難・行動', activeCount: '件の発生中事象', greenHeadline: '現在地周辺に危険情報は報告されていません。', yellowHeadline: '一部の状況を監視中。即時行動は不要です。', orangeHeadline: '危険度上昇中。移動前に安全ルートを確認してください。', redHeadline: '{count}件の重大な災害が発生中 — 危険区域を避けてください。' },
+    common: { loading: '読み込み中…', retry: '再試行', cancel: 'キャンセル', save: '保存', close: '閉じる', confirm: '確認', submit: '送信', away: '離れています', viewOnMap: 'マップで見る', getDirections: '経路案内', call: '電話する', share: '共有', offlineBanner: 'オフラインです — 保存されたデータを表示中。', error: 'エラーが発生しました', tryAgain: 'もう一度試す' },
+    sos: { title: '緊急 SOS', holdToConfirm: '长押しでSOS送信', holdInstructions: '2秒間長押しして救助隊に位置情報を送信。', typeLabel: '緊急事態の種類', sent: 'SOS送信完了 — 救助隊に位置が共有されました' },
+    map: { title: 'リアルタイム災害マップ', planRoute: '安全ルート計画', origin: '出発地', destination: '目的地', findRoute: '最安全ルートを検索' },
+    shelters: { title: '避難所・支援施設', sortedByDistance: '距離順で表示' },
+    report: { title: '被害・状況報告', submit: '通報を送信', submitted: '通報が送信されました — ご協力ありがとうございます！' },
+    broadcasts: { title: '公式緊急情報' }, family: { title: '家族の安否確認', iAmSafe: '無事です', iNeedHelp: '助けが必要です' },
+    firstAid: { title: '応急手当マニュアル' }, assistant: { title: 'AI防災アシスタント' }, admin: { title: 'レスポンダーダッシュボード' }, settings: { title: '設定', language: '言語' },
+  },
+
+  pt: {
+    appName: 'RAKSHA', tagline: 'Rede de Resposta a Desastres',
+    nav: { map: 'Mapa', sos: 'SOS', shelters: 'Abrigos', report: 'Reportar', broadcasts: 'Alertas', family: 'Família', firstAid: 'Primeiros Socorros', assistant: 'Assistente', admin: 'Admin', settings: 'Configurações', more: 'Mais' },
+    alert: { green: 'Sem Perigo', yellow: 'Atenção', orange: 'Prepare-se', red: 'Ação Imediata', activeCount: 'incidente(s) ativo(s)', greenHeadline: 'Nenhum perigo relatado em sua área.', yellowHeadline: 'Relatórios isolados sob monitoramento.', orangeHeadline: 'Atividade de perigo elevada. Verifique rotas seguras.', redHeadline: '{count} incidente(s) grave(s) ativo(s) — evite as áreas afetadas.' },
+    common: { loading: 'Carregando…', retry: 'Tentar novamente', cancel: 'Cancelar', save: 'Salvar', close: 'Fechar', confirm: 'Confirmar', submit: 'Enviar', away: 'de distância', viewOnMap: 'Ver no mapa', getDirections: 'Obter rota', call: 'Ligar', share: 'Compartilhar', offlineBanner: 'Você está offline — exibindo dados salvos.', error: 'Ocorreu um erro', tryAgain: 'Tentar novamente' },
+    sos: { title: 'SOS de Emergência', holdToConfirm: 'SEGURE PARA ENVIAR', holdInstructions: 'Segure por 2 segundos para enviar sua localização.', typeLabel: 'Qual o tipo de emergência?', sent: 'SOS enviado — localização visível aos socorristas' },
+    map: { title: 'Mapa de Desastres Ao Vivo', planRoute: 'Planejar rota segura', origin: 'Origem', destination: 'Destino', findRoute: 'Buscar rota mais segura' },
+    shelters: { title: 'Abrigos e Instalações', sortedByDistance: 'Ordenado por distância' },
+    report: { title: 'Reportar Incidente', submit: 'Enviar relatório', submitted: 'Relatório enviado — obrigado!' },
+    broadcasts: { title: 'Alertas Oficiais' }, family: { title: 'Segurança da Família', iAmSafe: 'Estou seguro', iNeedHelp: 'Preciso de ajuda' },
+    firstAid: { title: 'Guia de Primeiros Socorros' }, assistant: { title: 'Assistente IA de Perigos' }, admin: { title: 'Painel de Operações' }, settings: { title: 'Configurações', language: 'Idioma' },
+  },
+
+  ru: {
+    appName: 'RAKSHA', tagline: 'Служба Реагирования на ЧС',
+    nav: { map: 'Карта', sos: 'SOS', shelters: 'Укрытия', report: 'Сообщить', broadcasts: 'Оповещения', family: 'Семья', firstAid: 'Первая помощь', assistant: 'Помощник', admin: 'Админ', settings: 'Настройки', more: 'Еще' },
+    alert: { green: 'Безопасно', yellow: 'Внимание', orange: 'Готовность', red: 'Действуйте', activeCount: 'активных происшествий', greenHeadline: 'В вашем районе угроз не обнаружено.', yellowHeadline: 'Единичные сообщения на контроле.', orangeHeadline: 'Повышенная опасность. Проверьте безопасные маршруты.', redHeadline: '{count} серъезных инцидентов — избегайте опасных зон.' },
+    common: { loading: 'Загрузка…', retry: 'Повторить', cancel: 'Отмена', save: 'Сохранить', close: 'Закрыть', confirm: 'Подтвердить', submit: 'Отправить', away: 'расстояние', viewOnMap: 'Показать на карте', getDirections: 'Маршрут', call: 'Позвонить', share: 'Поделиться', offlineBanner: 'Вы оффлайн — показаны загруженные данные.', error: 'Произошла ошибка', tryAgain: 'Попробовать снова' },
+    sos: { title: 'Экстренный SOS', holdToConfirm: 'УДЕРЖИВАЙТЕ ДЛЯ ОТПРАВКИ', holdInstructions: 'Удерживайте 2 секунды для отправки геопозиции.', typeLabel: 'Тип чрезвычайной ситуации?', sent: 'SOS отправлен — геопозиция передана спасателям' },
+    map: { title: 'Карта ЧС в Реальном Времени', planRoute: 'Безопасный маршрут', origin: 'Старт', destination: 'Финиш', findRoute: 'Найти безопасный путь' },
+    shelters: { title: 'Укрытия и Пункты Помощи', sortedByDistance: 'Сортировка по расстоянию' },
+    report: { title: 'Сообщить о ЧС', submit: 'Отправить отчет', submitted: 'Отчет отправлен — спасибо!' },
+    broadcasts: { title: 'Официальные Предупреждения' }, family: { title: 'Безопасность Семьи', iAmSafe: 'Я в безопасности', iNeedHelp: 'Нужна помощь' },
+    firstAid: { title: 'Памятка Первой Помощи' }, assistant: { title: 'ИИ-Помощник по ЧС' }, admin: { title: 'Панель Диспетчера' }, settings: { title: 'Настройки', language: 'Язык' },
+  },
+
+  ko: {
+    appName: 'RAKSHA 락샤', tagline: '재난 대응 네크워크',
+    nav: { map: '지도', sos: 'SOS', shelters: '대피소', report: '제보', broadcasts: '경보', family: '가족', firstAid: '응급처치', assistant: 'AI 도우미', admin: '관리자', settings: '설정', more: '더보기' },
+    alert: { green: '안전', yellow: '주의', orange: '경계', red: '대피·대응', activeCount: '건의 활성 재난', greenHeadline: '현재 주변 지역에 보고된 위험이 없습니다.', yellowHeadline: '일부 상황 모니터링 중입니다.', orangeHeadline: '위험도가 상승 중입니다. 안전한 이동 경로를 확인하세요.', redHeadline: '{count}건의 심각한 재난 발생 중 — 해당 지역을 피하세요.' },
+    common: { loading: '로딩 중…', retry: '재시도', cancel: '취소', save: '저장', close: '닫기', confirm: '확인', submit: '제출', away: '거리', viewOnMap: '지도에서 보기', getDirections: '길찾기', call: '전화', share: '공유', offlineBanner: '오프라인 상태입니다 — 오프라인 데이터를 표시합니다.', error: '오류가 발생했습니다', tryAgain: '다시 시도' },
+    sos: { title: '긴급 SOS', holdToConfirm: 'SOS 전송 (길게 누르기)', holdInstructions: '2초간 누르면 구조대에 실시간 위치가 전송됩니다.', typeLabel: '긴급 상황 유형 선택', sent: 'SOS 전송 완료 — 구조대에 위치가 공유되었습니다' },
+    map: { title: '실시간 재난 지도', planRoute: '안전 경로 계획', origin: '출발지', destination: '도착지', findRoute: '가장 안전한 경로 찾기' },
+    shelters: { title: '대피소 및 구호 시설', sortedByDistance: '거리순 정렬' },
+    report: { title: '재난 상황 제보', submit: '제보 제출', submitted: '제보가 접수되었습니다 — 감사합니다!' },
+    broadcasts: { title: '공식 재난 경보' }, family: { title: '가족 안전 확인', iAmSafe: '안전합니다', iNeedHelp: '도움이 필요합니다' },
+    firstAid: { title: '응급처치 가이드' }, assistant: { title: 'AI 재난 도우미' }, admin: { title: '구조대 상황판' }, settings: { title: '설정', language: '언어' },
   },
 };
 
-export const SUPPORTED_LANGUAGES = [
-  { code: 'en', label: 'English' },
-  { code: 'hi', label: 'हिन्दी' },
-];
-
-/** Dot-path lookup, e.g. t('en', 'sos.holdToConfirm'). Falls back to English, then the key itself. */
 export function translate(lang, path) {
   const dict = translations[lang] || translations.en;
   const fallback = translations.en;

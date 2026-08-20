@@ -159,7 +159,7 @@ export function MapView() {
         </div>
       )}
 
-      {routingOpen && (
+          {routingOpen && (
         <div className="card" style={{ marginBottom: 'var(--space-3)' }}>
           <h4 style={{ marginBottom: 'var(--space-3)' }}>{t('map.planRoute')}</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
@@ -169,6 +169,7 @@ export function MapView() {
               picking={pickingField === 'origin'}
               onPick={() => setPickingField('origin')}
               onUseLocation={() => useMyLocationFor('origin')}
+              t={t}
             />
             <RoutePointRow
               label={t('map.destination')}
@@ -176,6 +177,7 @@ export function MapView() {
               picking={pickingField === 'destination'}
               onPick={() => setPickingField('destination')}
               onUseLocation={() => useMyLocationFor('destination')}
+              t={t}
             />
           </div>
           <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-3)' }}>
@@ -223,7 +225,7 @@ export function MapView() {
                   <Popup>
                     <strong style={{ textTransform: 'capitalize' }}>{t(`report.types.${incident.type}`)}</strong>
                     <div style={{ fontSize: 12, margin: '4px 0' }}>
-                      {t('map.severity')} {incident.severity}/5 · {timeAgo(incident.createdAt)}
+                      {t('map.severity')} {incident.severity}/5 · {timeAgo(incident.createdAt, t)}
                     </div>
                     {incident.description && <p style={{ fontSize: 13, margin: '4px 0' }}>{incident.description}</p>}
                     <StatusBadge color={severityToAlertColor(incident.severity, incident.status)}>
@@ -263,7 +265,7 @@ export function MapView() {
       </div>
       {pickingField && (
         <p style={{ fontSize: 12, color: 'var(--ink-soft)', marginTop: 'var(--space-2)' }}>
-          <Crosshair size={14} style={{ verticalAlign: 'middle' }} /> Tap the map to set the {pickingField}.
+          <Crosshair size={14} style={{ verticalAlign: 'middle' }} /> {t('map.tapMapToSet')} {pickingField === 'origin' ? t('map.origin') : t('map.destination')}.
         </p>
       )}
       {!filtersOpen && !routingOpen && (
@@ -273,7 +275,7 @@ export function MapView() {
   );
 }
 
-function RoutePointRow({ label, point, picking, onPick, onUseLocation }) {
+function RoutePointRow({ label, point, picking, onPick, onUseLocation, t }) {
   return (
     <div className="card-row" style={{ alignItems: 'center' }}>
       <div>
@@ -284,7 +286,7 @@ function RoutePointRow({ label, point, picking, onPick, onUseLocation }) {
       </div>
       <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
         <button type="button" className={`btn btn--sm ${picking ? 'btn--primary' : 'btn--outline'}`} onClick={onPick}>
-          <Crosshair size={14} /> {picking ? 'Tap map…' : 'Pick'}
+          <Crosshair size={14} /> {picking ? t('map.tapMap') : t('map.pick')}
         </button>
         <button type="button" className="btn btn--ghost btn--sm" onClick={onUseLocation}>
           <Crosshair size={14} /> GPS

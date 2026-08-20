@@ -87,7 +87,7 @@ export function FamilyView() {
   };
 
   const shareCode = async () => {
-    const text = `Join my RAKSHA family safety group with code: ${activeGroup}`;
+    const text = (t('family.shareInvite') || 'Join my RAKSHA family safety group with code: {code}').replace('{code}', activeGroup);
     if (navigator.share) {
       try { await navigator.share({ text }); return; } catch { /* user cancelled — fall through */ }
     }

@@ -44,7 +44,7 @@ export function NavBar() {
           aria-expanded={moreOpen}
         >
           {moreOpen ? <X /> : <Menu />}
-          <span>More</span>
+          <span>{t('nav.more')}</span>
         </button>
       </div>
 

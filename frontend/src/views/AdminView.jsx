@@ -52,12 +52,12 @@ function AdminLogin({ onLoggedIn, t }) {
             autoFocus
           />
         </div>
-        {error && <p style={{ color: 'var(--alert-red-console)', fontSize: 13, marginBottom: 'var(--space-3)' }}>{error}</p>}
+        {error && <p style={{ color: 'var(--alert-red)', fontSize: 13, marginBottom: 'var(--space-3)' }}>{error}</p>}
         <button className="btn btn--primary btn--block" disabled={loading} type="submit">
           <LogIn size={16} /> {t('admin.loginButton')}
         </button>
-        <p style={{ fontSize: 11, color: 'var(--console-ink-soft)', marginTop: 'var(--space-3)' }}>
-          Demo default passcode: <code className="mono">raksha-demo</code> (set ADMIN_PASSCODE in backend/.env to change it)
+        <p style={{ fontSize: 11, color: 'var(--ink-soft)', marginTop: 'var(--space-3)' }}>
+          {t('admin.demoHint')} <code className="mono">raksha-demo</code> {t('admin.demoHintSuffix')}
         </p>
       </form>
     </div>
@@ -107,7 +107,7 @@ function Dashboard({ token, onLogout, t }) {
 
       <div className="stat-grid">
         <StatCard icon={AlertOctagon} value={activeIncidents.length} label={t('admin.activeIncidents')} />
-        <StatCard icon={Siren} value={incidents.filter((i) => i.status === 'unverified').length} label="Unverified" />
+        <StatCard icon={Siren} value={incidents.filter((i) => i.status === 'unverified').length} label={t('admin.unverified')} />
         <StatCard icon={Percent} value={`${verifiedShare}%`} label={t('admin.verifiedShare')} />
         <StatCard icon={Home} value={`${avgOccupancy}%`} label={t('admin.avgShelterOccupancy')} />
       </div>
@@ -123,10 +123,10 @@ function Dashboard({ token, onLogout, t }) {
                 <div style={{ minWidth: 0 }}>
                   <div style={{ fontWeight: 700, display: 'flex', gap: 8, alignItems: 'center' }}>
                     {t(`report.types.${incident.type}`)}
-                    <span className="mono" style={{ fontSize: 11, color: 'var(--console-ink-soft)' }}>P{incident.priorityScore}</span>
+                    <span className="mono" style={{ fontSize: 11, color: 'var(--ink-soft)' }}>P{incident.priorityScore}</span>
                   </div>
-                  <div style={{ fontSize: 12, color: 'var(--console-ink-soft)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {incident.description || '—'} · {timeAgo(incident.createdAt)}
+                  <div style={{ fontSize: 12, color: 'var(--ink-soft)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {incident.description || '—'} · {timeAgo(incident.createdAt, t)}
                   </div>
                 </div>
               </div>
@@ -144,7 +144,7 @@ function Dashboard({ token, onLogout, t }) {
             </div>
           );
         })}
-        {activeIncidents.length === 0 && <p style={{ color: 'var(--console-ink-soft)' }}>{t('common.noResults')}</p>}
+        {activeIncidents.length === 0 && <p style={{ color: 'var(--ink-soft)' }}>{t('common.noResults')}</p>}
       </div>
 
       <h3 style={{ marginBottom: 'var(--space-3)' }}>{t('admin.manageFacilities')}</h3>
@@ -153,7 +153,7 @@ function Dashboard({ token, onLogout, t }) {
           <div key={facility.id} className="card card-row">
             <div>
               <div style={{ fontWeight: 700 }}>{facility.name}</div>
-              <div style={{ fontSize: 12, color: 'var(--console-ink-soft)' }}>{facility.type}</div>
+              <div style={{ fontSize: 12, color: 'var(--ink-soft)' }}>{t(`shelters.${facility.type}`) || facility.type}</div>
             </div>
             {facility.capacity != null ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -166,10 +166,10 @@ function Dashboard({ token, onLogout, t }) {
                   max={facility.capacity}
                   onBlur={(e) => updateOccupancy(facility, e.target.value)}
                 />
-                <span className="mono" style={{ fontSize: 13, color: 'var(--console-ink-soft)' }}>/ {facility.capacity}</span>
+                <span className="mono" style={{ fontSize: 13, color: 'var(--ink-soft)' }}>/ {facility.capacity}</span>
               </div>
             ) : (
-              <span style={{ fontSize: 12, color: 'var(--console-ink-soft)' }}>—</span>
+              <span style={{ fontSize: 12, color: 'var(--ink-soft)' }}>—</span>
             )}
           </div>
         ))}
@@ -181,7 +181,7 @@ function Dashboard({ token, onLogout, t }) {
 function StatCard({ icon: Icon, value, label }) {
   return (
     <div className="stat-card">
-      <Icon size={18} style={{ color: 'var(--console-ink-soft)', marginBottom: 8 }} />
+      <Icon size={18} style={{ color: 'var(--ink-soft)', marginBottom: 8 }} />
       <div className="stat-card__value">{value}</div>
       <div className="stat-card__label">{label}</div>
     </div>

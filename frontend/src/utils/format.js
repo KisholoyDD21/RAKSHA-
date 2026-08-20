@@ -1,13 +1,13 @@
-export function timeAgo(isoString) {
+export function timeAgo(isoString, t) {
   if (!isoString) return '';
   const seconds = Math.floor((Date.now() - new Date(isoString).getTime()) / 1000);
-  if (seconds < 60) return 'just now';
+  if (seconds < 60) return t ? t('time.justNow') : 'just now';
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) return t ? t('time.minutesAgo').replace('{m}', minutes) : `${minutes}m ago`;
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return t ? t('time.hoursAgo').replace('{h}', hours) : `${hours}h ago`;
   const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+  return t ? t('time.daysAgo').replace('{d}', days) : `${days}d ago`;
 }
 
 export function formatDistance(meters) {
