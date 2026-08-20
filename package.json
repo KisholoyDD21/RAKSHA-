@@ -2,6 +2,7 @@
   "name": "raksha-root",
   "private": true,
   "scripts": {
+    "build": "npm --prefix frontend install && npm --prefix frontend run build",
     "dev": "concurrently -n \"backend,frontend\" -c \"blue,green\" \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev",
